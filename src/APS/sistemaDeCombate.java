@@ -1,29 +1,45 @@
 package APS;
 
-class sistemaDeCombate {
+public class sistemaDeCombate {
 
-    static void iniciarCombate(Personagens player, Personagens enemy) {
+    public static void iniciarCombate(Personagens player, Personagens enemy) {
+
+        System.out.println("Combate iniciado!");
 
         while (player.vivo() && enemy.vivo()) {
 
-        	sistemaMenu.mostrarStatus(player, enemy);
+            sistemaMenu.status(player, enemy);
 
-        	sistemaMenu.turnoJogador(player, enemy);
+            Action playerAction = sistemaMenu.turnoJogador(player);
+            Action enemyAction = enemyAI.decidir(enemy, player);
 
-            if (!enemy.vivo()) break;
+            // DEFESAS
+            if (playerAction == Action.DEFEND) player.defender(5);
+            if (enemyAction == Action.DEFEND) enemy.defender(5);
+            if (enemyAction == Action.CAUTIOUS) enemy.defender(2);
 
-            turnoInimigo(enemy, player);
+            // ATAQUES
+            if (playerAction == Action.ATTACK) {
+                sistemaDeAcao.atacar(player, enemy);
+            }
+
+            if (enemy.vivo() && enemyAction == Action.ATTACK) {
+                sistemaDeAcao.atacar(enemy, player);
+            }
+
+            // RESET DOS TURNOS
+            player.resetTurno();
+            enemy.resetTurno();
         }
+
+        sistemaMenu.status(player, enemy);
+
+        System.out.println("\n===== RESULTADO =====");
 
         if (player.vivo()) {
             System.out.println("Você venceu!");
         } else {
             System.out.println("Você perdeu...");
         }
-    }
-
-    static void turnoInimigo(Personagens enemy, Personagens player) {
-        System.out.println("\nTurno do inimigo...");
-        sistemaDeAcao.atacar(enemy, player);
     }
 }

@@ -1,0 +1,7 @@
+ta ainda é so o goblin q tem pra luta n adicionei muita coisa
+fiz uma IA bem simples defende as vezes com o cauteloso e ataca as vezes quando o goblin fica com menos de 10 de vida começa a defende
+arrumei a defesa n tava funfando
+a def reseta cada turno antes n resetava
+criei um enum bem parecido com python ent atk def e cautela é 1 2 e 3
+dividi algumas cosas no combate e açao
+e deixei o bagui mais bonitin e funcional com alguns bagui de encaputamento hihi

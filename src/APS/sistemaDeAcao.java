@@ -1,18 +1,14 @@
 package APS;
 
-class sistemaDeAcao {
+public class sistemaDeAcao {
 
-    static void atacar(Personagens atk, Personagens def) {
-        int dano = atk.atk - def.def;
+    public static void atacar(Personagens atk, Personagens def) {
+
+        int dano = atk.getAtk() - def.getDefTotal();
         if (dano < 1) dano = 1;
 
-        def.hp -= dano;
+        def.receberDano(dano);
 
-        System.out.println(atk.nome + " causou " + dano + " de dano!");
-    }
-
-    static void defender(Personagens p) {
-        System.out.println(p.nome + " está defendendo!");
-        p.def += 3;
+        System.out.println(atk.getNome() + " causou " + dano + " de dano em " + def.getNome() + "!");
     }
 }

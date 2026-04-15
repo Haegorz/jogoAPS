@@ -1,34 +1,40 @@
 package APS;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
-class sistemaMenu {
+public class sistemaMenu {
 
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
-    static void mostrarStatus(Personagens p, Personagens e) {
+    public static void status(Personagens p, Personagens e) {
+
         System.out.println("\n====================");
-        System.out.println(p.nome + " HP: " + p.hp + "/" + p.maxHp);
-        System.out.println(e.nome + " HP: " + e.hp);
+        System.out.println(p.getNome() + " HP: " + p.getHp() + "/" + p.getMaxHp()
+                + " | ATK:" + p.getAtk() + " DEF:" + p.getDefTotal());
+        System.out.println(e.getNome() + " HP: " + e.getHp() + "/" + e.getMaxHp()
+                + " | ATK:" + e.getAtk() + " DEF:" + e.getDefTotal());
         System.out.println("====================");
     }
 
-    static void turnoJogador(Personagens p, Personagens e) {
+    public static Action turnoJogador(Personagens p) {
 
         while (true) {
+
             System.out.println("\n1 - Atacar");
             System.out.println("2 - Defender");
 
-            int escolha = sc.nextInt();
+            try {
+                int escolha = sc.nextInt();
 
-            switch (escolha) {
-                case 1:
-                	sistemaDeAcao.atacar(p, e);
-                    return;
+                if (escolha == 1) return Action.ATTACK;
+                if (escolha == 2) return Action.DEFEND;
 
-                case 2:
-                	sistemaDeAcao.defender(p);
-                    return;
+                System.out.println("Opção inválida.");
+
+            } catch (InputMismatchException ex) {
+                System.out.println("Digite um número válido!");
+                sc.nextLine();
             }
         }
     }
