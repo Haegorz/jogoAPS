@@ -1,12 +1,39 @@
 package APS;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        Personagens player = new Personagens("Hero", 60, 12, 5);
-        Personagens enemy = new Personagens("Goblin", 50, 10, 4);
+        Scanner sc = new Scanner(System.in);
 
-        sistemaDeCombate.iniciarCombate(player, enemy);
+        Personagens player = new Personagens("Hero", 60, 12, 5);
+
+        Mapa mapaAtual = criaMapa.criarMundo();
+
+        while (true) {
+
+            mapaAtual.aoEntrar(player);
+            mapaAtual.mostrarDirecoes();
+
+            System.out.print("\nDigite a direção: ");
+            String input = sc.nextLine().toUpperCase();
+
+            try {
+                Direction direcao = Direction.valueOf(input);
+
+                Mapa proximo = mapaAtual.proximoMapa(direcao);
+
+                if (proximo == null) {
+                    System.out.println("Não dá pra ir pra esse lado.");
+                } else {
+                    mapaAtual = proximo;
+                }
+
+            } catch (IllegalArgumentException e) {
+                System.out.println("Direção inválida.");
+            }
+        }
     }
 }

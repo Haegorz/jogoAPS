@@ -1,7 +1,14 @@
-ta ainda é so o goblin q tem pra luta n adicionei muita coisa
-fiz uma IA bem simples defende as vezes com o cauteloso e ataca as vezes quando o goblin fica com menos de 10 de vida começa a defende
-arrumei a defesa n tava funfando
-a def reseta cada turno antes n resetava
-criei um enum bem parecido com python ent atk def e cautela é 1 2 e 3
-dividi algumas cosas no combate e açao
-e deixei o bagui mais bonitin e funcional com alguns bagui de encaputamento hihi
+good morning night city 
+ent esse é o novo update agr num branch diferente ja q n é exatamente o codigo base hihi
+oq foi adicionado nesse update
+um mapa semi funcional tem uma funçao q determina o q cada mapa faz e um q cria mapas novos para ser referenciado e utilizado mais facilmente no sistema
+oq o mapas conseguem fazer
+um metodo aoEntra() q decide oq acontece 
+tem cidade q cura
+floresta q tem uma chance de spawnar um goblin
+vila é o spawn so printa "lugar tranquilo"
+tem um bagui q printa as direçoes e oto bagui q mostra quais direçoes da pra utilizar
+switch para as direçoes
+e deixei o main consegui iniciar o mapas tbm e se vc tiver procurando onde ta o goblin eu deixei ele no eventoFloresta
+criaMapa foi o q mais me deu dor de cabeça pra cria mesmo ele sendo mais ou menos simples ent basicamente ele cria os mapas fora do main pra deixar mais organizado
+e dentro dele mesmo ele cria ponteiros para onde cada lugar vai dar entao em vila tem um ponteiro para o norte q da para floresta e floresta tem ponteiro para cada lado q da para todos os mapas criados

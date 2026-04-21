@@ -26,7 +26,10 @@ public class sistemaDeCombate {
             if (enemy.vivo() && enemyAction == Action.ATTACK) {
                 sistemaDeAcao.atacar(enemy, player);
             }
-
+            
+            //MAGIA??
+            
+            
             // RESET DOS TURNOS
             player.resetTurno();
             enemy.resetTurno();

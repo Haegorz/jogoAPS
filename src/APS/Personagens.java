@@ -23,12 +23,23 @@ public class Personagens {
     public int getAtk() { return atk; }
     public int getDefTotal() { return def + defTemp; }
 
+    public void setHp(int hp) {
+        if (hp < 0) {
+            this.hp = 0;
+        } else if (hp > maxHp) {
+            this.hp = maxHp;
+        } else {
+            this.hp = hp;
+        }
+    }
+
     public boolean vivo() {
         return hp > 0;
     }
 
     public void receberDano(int dano) {
         hp -= dano;
+
         if (hp < 0) hp = 0;
     }
 
