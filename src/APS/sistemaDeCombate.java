@@ -1,17 +1,43 @@
 package APS;
 
-public class sistemaDeCombate {
+import java.util.Scanner;
 
-    public static void iniciarCombate(Personagens player, Personagens enemy) {
+public class SistemaDeCombate {
 
+    public static void iniciarCombate(Player player, Personagens enemy) {
+        Scanner scan = new Scanner(System.in);
         System.out.println("Combate iniciado!");
 
         while (player.vivo() && enemy.vivo()) {
 
             sistemaMenu.status(player, enemy);
 
-            Action playerAction = sistemaMenu.turnoJogador(player);
-            Action enemyAction = enemyAI.decidir(enemy, player);
+            Action playerAction;
+
+                
+            while (true) {
+                playerAction = sistemaMenu.turnoJogador(player);
+
+                if (playerAction == Action.INV) {
+                    player.getInventario();
+
+                    while (true) {
+                        System.out.println("Digite o Item a ser usado");
+                        String itemToUse = scan.nextLine();
+
+                        if (player.usarItem(itemToUse)) {
+                            break; 
+                        }
+
+                        
+                    }
+
+                    break; 
+                }
+
+                break; 
+            }
+            Action enemyAction = EnemyAI.decidir(enemy, player);
 
             // DEFESAS
             if (playerAction == Action.DEFEND) player.defender(5);
@@ -41,5 +67,7 @@ public class sistemaDeCombate {
         } else {
             System.out.println("Você perdeu...");
         }
+
+        scan.close(); 
     }
 }

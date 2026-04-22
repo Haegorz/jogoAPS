@@ -1,7 +1,7 @@
 package APS;
 
-import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class sistemaMenu {
 
@@ -23,12 +23,22 @@ public class sistemaMenu {
 
             System.out.println("\n1 - Atacar");
             System.out.println("2 - Defender");
+            System.out.println("3 - Inventario");
 
             try {
                 int escolha = sc.nextInt();
+                
+                switch (escolha){
+                    case 1:
+                        return Action.ATTACK;
+                    case 2:
+                        return Action.DEFEND;
+                    case 3:
+                        return Action.INV;
+                    default:
+                        System.out.println("Opção inválida.");
 
-                if (escolha == 1) return Action.ATTACK;
-                if (escolha == 2) return Action.DEFEND;
+                }
 
                 System.out.println("Opção inválida.");
 

@@ -2,9 +2,9 @@ package APS;
 
 import java.util.Random;
 
-public class enemyAI {
+public class EnemyAI {
 
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
 
     public static Action decidir(Personagens enemy, Personagens player) {
 
