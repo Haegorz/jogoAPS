@@ -8,31 +8,39 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        Personagens player = new Personagens("Hero", 60, 12, 5);
-
         Mapa mapaAtual = criaMapa.criarMundo();
-
+        MenuPrincipal menu = new MenuPrincipal();
+        Personagens player = menu.criarMenu(sc);
+        inputTradutor tradutor = new inputTradutor();
+        
         while (true) {
 
-            mapaAtual.aoEntrar(player);
-            mapaAtual.mostrarDirecoes();
+            mapaAtual.aoEntrar(player, sc);
+            mapaAtual.mostrarMiniMapa();
+            while(true) {
+            	System.out.print("\nDigite a direção: ");
+            	
+            	String input = tradutor.inputHandler(sc);
 
-            System.out.print("\nDigite a direção: ");
-            String input = sc.nextLine().toUpperCase();
+            	try {
+            		Direction direcao = Direction.valueOf(input);
+            		Mapa proximo = mapaAtual.proximoMapa(direcao);
 
-            try {
-                Direction direcao = Direction.valueOf(input);
+            		if (proximo == null) {
+            			System.out.println("Não dá pra ir pra esse lado.");
+            			System.out.println("Escolha uma dessas direçoes:");
+            			mapaAtual.mostrarMiniMapa();
+            			
+            		} else {
+            			mapaAtual = proximo;
+            			break;
+            		}
 
-                Mapa proximo = mapaAtual.proximoMapa(direcao);
-
-                if (proximo == null) {
-                    System.out.println("Não dá pra ir pra esse lado.");
-                } else {
-                    mapaAtual = proximo;
-                }
-
-            } catch (IllegalArgumentException e) {
-                System.out.println("Direção inválida.");
+            	} catch (IllegalArgumentException e) {
+            		System.out.println("Direção inválida.");
+            		System.out.println("Escolha uma dessas direçoes:");
+            		mapaAtual.mostrarMiniMapa();
+            	}
             }
         }
     }

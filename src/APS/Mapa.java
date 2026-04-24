@@ -1,10 +1,10 @@
 package APS;
 
 import java.util.Scanner;
-import java.util.Random;
 
 public class Mapa {
 
+    private TipoMapa tipo;
     private String nome;
 
     private Mapa norte;
@@ -12,10 +12,8 @@ public class Mapa {
     private Mapa leste;
     private Mapa oeste;
 
-    private static Scanner sc = new Scanner(System.in);
-    private static Random rand = new Random();
-
-    public Mapa(String nome) {
+    public Mapa(TipoMapa tipo, String nome) {
+        this.tipo = tipo;
         this.nome = nome;
     }
 
@@ -38,65 +36,88 @@ public class Mapa {
         }
     }
 
-    public void mostrarDirecoes() {
-        System.out.println("\nDireções disponíveis:");
-        if (norte != null) System.out.println("- NORTE");
-        if (sul != null) System.out.println("- SUL");
-        if (leste != null) System.out.println("- LESTE");
-        if (oeste != null) System.out.println("- OESTE");
-    }
+    public void mostrarMiniMapa() {
 
-    public void aoEntrar(Personagens player) {
+        String n;
+        if (norte != null) {
+            n = norte.getNome();
+        } else {
+            n = " ";
+        }
+
+        String s;
+        if (sul != null) {
+            s = sul.getNome();
+        } else {
+            s = " ";
+        }
+
+        String l;
+        if (leste != null) {
+            l = leste.getNome();
+        } else {
+            l = " ";
+        }
+
+        String o;
+        if (oeste != null) {
+            o = oeste.getNome();
+        } else {
+            o = " ";
+        }
+
+        System.out.println("\n=============================== MAPA ================================\n");
+
+        if (norte != null) {
+            System.out.println("                        [" + n + "]");
+            System.out.println("                          Norte");
+            System.out.println("                            |");
+        } else {
+            System.out.println("                            |");
+        }
+
+        if (oeste != null) {
+            System.out.print("[" + o + "] Oeste");
+        } else {
+            System.out.print("     ");
+        }
+
+        if (oeste != null) {
+            System.out.print(" -- [Player] -- ");
+        } else {
+            System.out.print("                 -- [Player] -- ");
+        }
+
+        if (leste != null) {
+            System.out.println("Leste [" + l + "]");
+        } else {
+            System.out.println("");
+        }
+
+        if (sul != null) {
+            System.out.println("                            |");
+            System.out.println("                           Sul");
+            System.out.println("                        [" + s + "]");
+        } else {
+            System.out.println("                            |");
+        }
+
+        System.out.println("\n====================================================================");
+    }
+    public void aoEntrar(Personagens player, Scanner sc) {
 
         System.out.println("\nVocê está em: " + nome);
 
-        if (nome.equalsIgnoreCase("Floresta")) {
-            eventoFloresta(player);
+        if (tipo == TipoMapa.FLORESTA) {
+            EventoMapa.eventoFloresta(player, sc);
         }
 
-        if (nome.equalsIgnoreCase("Cidade")) {
-            menuCidade(player);
+        if (tipo == TipoMapa.CIDADE) {
+            EventoMapa.eventoCidade(player, sc);
         }
 
-        if (nome.equalsIgnoreCase("Vila")) {
+        if (tipo == TipoMapa.VILA) {
             System.out.println("Lugar tranquilo.");
-        }
-    }
-
-    //Eventinhos so fiz da cidade e da floresta n tem muita coisa pra trabalha alem disso :|
-
-    private void eventoFloresta(Personagens player) {
-
-        if (rand.nextInt(100) < 50) {
-            System.out.println("Um inimigo apareceu!");
-
-            Personagens enemy = new Personagens("Goblin", 50, 10, 4);
-            sistemaDeCombate.iniciarCombate(player, enemy);
-        } else {
-            System.out.println("A floresta está silenciosa...");
-        }
-    }
-
-    private void menuCidade(Personagens player) {
-
-        while (true) {
-
-            System.out.println("\n=== CIDADE ===");
-            System.out.println("1 - Curar");
-            System.out.println("2 - Sair");
-
-            int op = sc.nextInt();
-
-            if (op == 1) {
-                player.setHp(player.getMaxHp());
-                System.out.println("Você foi curado!");
-            }
-            else if (op == 2) {
-                break;
-            }
-            else {
-                System.out.println("Opção inválida.");
-            }
         }
     }
 }

@@ -1,8 +1,10 @@
 package APS;
 
+import java.util.Scanner;
+
 public class sistemaDeCombate {
 
-    public static void iniciarCombate(Personagens player, Personagens enemy) {
+    public static void iniciarCombate(Personagens player, Personagens enemy, Scanner sc) {
 
         System.out.println("Combate iniciado!");
 
@@ -10,15 +12,13 @@ public class sistemaDeCombate {
 
             sistemaMenu.status(player, enemy);
 
-            Action playerAction = sistemaMenu.turnoJogador(player);
+            Action playerAction = sistemaMenu.turnoJogador(player, sc);
             Action enemyAction = enemyAI.decidir(enemy, player);
 
-            // DEFESAS
             if (playerAction == Action.DEFEND) player.defender(5);
             if (enemyAction == Action.DEFEND) enemy.defender(5);
             if (enemyAction == Action.CAUTIOUS) enemy.defender(2);
 
-            // ATAQUES
             if (playerAction == Action.ATTACK) {
                 sistemaDeAcao.atacar(player, enemy);
             }
@@ -26,11 +26,7 @@ public class sistemaDeCombate {
             if (enemy.vivo() && enemyAction == Action.ATTACK) {
                 sistemaDeAcao.atacar(enemy, player);
             }
-            
-            //MAGIA??
-            
-            
-            // RESET DOS TURNOS
+
             player.resetTurno();
             enemy.resetTurno();
         }
@@ -41,6 +37,8 @@ public class sistemaDeCombate {
 
         if (player.vivo()) {
             System.out.println("Você venceu!");
+            System.out.println("EXP ganho: " + enemy.getXpDrop() );
+            player.ganharXP(enemy.getXpDrop());
         } else {
             System.out.println("Você perdeu...");
         }

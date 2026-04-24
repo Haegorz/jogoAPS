@@ -1,14 +1,28 @@
-good morning night city 
-ent esse é o novo update agr num branch diferente ja q n é exatamente o codigo base hihi
-oq foi adicionado nesse update
-um mapa semi funcional tem uma funçao q determina o q cada mapa faz e um q cria mapas novos para ser referenciado e utilizado mais facilmente no sistema
-oq o mapas conseguem fazer
-um metodo aoEntra() q decide oq acontece 
-tem cidade q cura
-floresta q tem uma chance de spawnar um goblin
-vila é o spawn so printa "lugar tranquilo"
-tem um bagui q printa as direçoes e oto bagui q mostra quais direçoes da pra utilizar
-switch para as direçoes
-e deixei o main consegui iniciar o mapas tbm e se vc tiver procurando onde ta o goblin eu deixei ele no eventoFloresta
-criaMapa foi o q mais me deu dor de cabeça pra cria mesmo ele sendo mais ou menos simples ent basicamente ele cria os mapas fora do main pra deixar mais organizado
-e dentro dele mesmo ele cria ponteiros para onde cada lugar vai dar entao em vila tem um ponteiro para o norte q da para floresta e floresta tem ponteiro para cada lado q da para todos os mapas criados
+ola eu perdi o sentido da vida tehe ;3
+
+updates: 
+iterface para navegaçao foi corrigida e modificada agora é um minimapa ele funciona procurando se tem algum pointer em cada "lado" q seria norte sul leste e oeste se for null ele n printa o nome do mapa se tiver ele printa
+adicionei o level, exp, etc e bem simples ele usa 3 variveis exp pra determina quanto exp cada inimigo tem level q é o level atual e proximolevel q é o level cap ele utiliza getters e setters para pega e altera os levels etc
+adicionei flags q usa set q é diferente de setters set é parecido com uma lista ele so guarda um valor unico ent se vc adiciona uma flag chamada goblinBoss n da pra adiciona dnv e mantem a flag
+adicionei um tradutor tbm ent n é mais necesario escreve norte toda vez q vc q ir norte assim como todas as outras direçoes vc so precisa escrever s, n, o, l. ah ele funciona com um if e compara se a string é uma das direçoes e converte para a string correta
+adicionei um menu principal assim é possivel escolher classes diferentes ele é so um monte de string pra faze o menu e um switch para escolher a classe e tbm mudei os ifs da cidade para switch tbm
+tbm criei somente 10 mapas diferentes pq cria um mapa muito grande da muito trabalho, eu vo ve como fazer algo mais facil mas por enquanto é so isso q eu consigo fazer com criaMapa.java
+separei os eventos do mapa agr ele so chama os eventos do EventoMapa e faz o minimapa e navegaçao basicamente (tem q melhora dps)
+
+por enquanto é so isso de feature caso queira pesquisa o q eu adicionei aq esta o nome do q foi adicionado
+
+Set, hashset - localizado no personagens 
+
+por enquanto eu vo deixa o layout assim
+
+updates
+features novas 
+
+é so isso 
+
+	good night
+            good luck
+
+
+
+

@@ -5,8 +5,6 @@ import java.util.InputMismatchException;
 
 public class sistemaMenu {
 
-    private static Scanner sc = new Scanner(System.in);
-
     public static void status(Personagens p, Personagens e) {
 
         System.out.println("\n====================");
@@ -17,7 +15,7 @@ public class sistemaMenu {
         System.out.println("====================");
     }
 
-    public static Action turnoJogador(Personagens p) {
+    public static Action turnoJogador(Personagens p, Scanner sc) {
 
         while (true) {
 
@@ -26,6 +24,7 @@ public class sistemaMenu {
 
             try {
                 int escolha = sc.nextInt();
+                sc.nextLine();
 
                 if (escolha == 1) return Action.ATTACK;
                 if (escolha == 2) return Action.DEFEND;
