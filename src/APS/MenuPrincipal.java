@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MenuPrincipal {
 
-    public Personagens criarMenu(Scanner sc){
+    public Player criarMenu(Scanner sc){
 
         while(true) {
 
@@ -21,13 +21,13 @@ public class MenuPrincipal {
 
             switch (oji) {
                 case 1:
-                    return new Personagens("Cavaleiro", 60, 9, 14, 20);
+                    return new Player("Cavaleiro", 60, 9, 14);
 
                 case 2:
-                    return new Personagens("Mago", 40, 6, 3, 20);
+                    return new Player("Mago", 40, 6, 3);
 
                 case 3:
-                    return new Personagens("Espadachim", 45, 15, 5, 20);
+                    return new Player("Espadachim", 45, 15, 5);
 
                 default:
                     System.out.println("Opção inválida.");

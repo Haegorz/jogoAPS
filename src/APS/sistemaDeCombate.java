@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class sistemaDeCombate {
 
-    public static void iniciarCombate(Personagens player, Personagens enemy, Scanner sc) {
+	public static void iniciarCombate(Player player, Mobs enemy, Scanner sc) {
 
         System.out.println("Combate iniciado!");
 
         while (player.vivo() && enemy.vivo()) {
 
             sistemaMenu.status(player, enemy);
-
+            
             Action playerAction = sistemaMenu.turnoJogador(player, sc);
             Action enemyAction = enemyAI.decidir(enemy, player);
 
@@ -37,7 +37,7 @@ public class sistemaDeCombate {
 
         if (player.vivo()) {
             System.out.println("Você venceu!");
-            System.out.println("EXP ganho: " + enemy.getXpDrop() );
+            System.out.println("EXP ganho: " + enemy.getXpDrop());
             player.ganharXP(enemy.getXpDrop());
         } else {
             System.out.println("Você perdeu...");

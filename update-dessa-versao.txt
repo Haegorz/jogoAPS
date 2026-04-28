@@ -1,27 +1,19 @@
-ola eu perdi o sentido da vida tehe ;3
+put your foolish ambitions to rest.
 
-updates: 
-iterface para navegaçao foi corrigida e modificada agora é um minimapa ele funciona procurando se tem algum pointer em cada "lado" q seria norte sul leste e oeste se for null ele n printa o nome do mapa se tiver ele printa
-adicionei o level, exp, etc e bem simples ele usa 3 variveis exp pra determina quanto exp cada inimigo tem level q é o level atual e proximolevel q é o level cap ele utiliza getters e setters para pega e altera os levels etc
-adicionei flags q usa set q é diferente de setters set é parecido com uma lista ele so guarda um valor unico ent se vc adiciona uma flag chamada goblinBoss n da pra adiciona dnv e mantem a flag
-adicionei um tradutor tbm ent n é mais necesario escreve norte toda vez q vc q ir norte assim como todas as outras direçoes vc so precisa escrever s, n, o, l. ah ele funciona com um if e compara se a string é uma das direçoes e converte para a string correta
-adicionei um menu principal assim é possivel escolher classes diferentes ele é so um monte de string pra faze o menu e um switch para escolher a classe e tbm mudei os ifs da cidade para switch tbm
-tbm criei somente 10 mapas diferentes pq cria um mapa muito grande da muito trabalho, eu vo ve como fazer algo mais facil mas por enquanto é so isso q eu consigo fazer com criaMapa.java
-separei os eventos do mapa agr ele so chama os eventos do EventoMapa e faz o minimapa e navegaçao basicamente (tem q melhora dps)
+UpDaTeS
 
-por enquanto é so isso de feature caso queira pesquisa o q eu adicionei aq esta o nome do q foi adicionado
+foi adicionado duas coisas para q um game over exista gameloop e gamestate q é o enum basicamente ele cria um loop fora das outras classes ent se vc morre num dialogo por exemplo goblin secreto vc morre
+de vez de vez de ir pro menu de conversa do goblin sair desse menu pra entao morre nice (como ele funciona basicamente ele checka os estados devolvidos por cada evento q precisa de um menu ou algo parecido
+e age correspondentemente ent se mercador retorna continuar ele continua o loop de dialogo se retorna SAIR_MAPA ele sai mapa ;3)
 
-Set, hashset - localizado no personagens 
+foi adicionado um polimorfismo nos npcs ent agr eles podem ter vontande propria nao agem conforme o loop q o evento deles criam o unico problema é q tem q cria uma classe para cada npc unico(como ele funciona
+é basicamente NPC cria uma base e as outras classes NPCMarcelo etc usa ele pra poder criar algo novo ent pra criar um npc em algum lugar q é necessario por exemplo mapa vc so cria o objeto marcelo ou qualquer outro
+a e npcAtual é basicamente um bagui pra reconhecer se ta num loop de conversa basicamente)
 
-por enquanto eu vo deixa o layout assim
+personagens ficaram mais poliformicos tbm ent tem player q consegue ter suas propria açoes e mobs q podem ter suas proprias açoes diferntes assim como NPC eu sei q o do ramon tem eu so n tava querendo adcionar 
+isso no momento mas agr tem yippe
 
-updates
-features novas 
-
-é so isso 
-
-	good night
-            good luck
+é por enquanto é so isso parece pouco pq realmente é as unicas coisas q eu modifiquei foi para deixar mais facil de implementa coisas e deixa a estrutura mais corretinha.
 
 
 

@@ -6,7 +6,7 @@ public class enemyAI {
 
     private static Random rand = new Random();
 
-    public static Action decidir(Personagens enemy, Personagens player) {
+    public static Action decidir(Mobs enemy, Player player) {
 
         System.out.println("\nTurno do inimigo...");
 
