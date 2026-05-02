@@ -1,20 +1,67 @@
-put your foolish ambitions to rest.
+your drill is the drill that will pierce the very heavens 
 
-UpDaTeS
+updates: esse update eu vo faze com ia fodase eu to cansado ele vai faze um resumo completo do codigo
 
-foi adicionado duas coisas para q um game over exista gameloop e gamestate q é o enum basicamente ele cria um loop fora das outras classes ent se vc morre num dialogo por exemplo goblin secreto vc morre
-de vez de vez de ir pro menu de conversa do goblin sair desse menu pra entao morre nice (como ele funciona basicamente ele checka os estados devolvidos por cada evento q precisa de um menu ou algo parecido
-e age correspondentemente ent se mercador retorna continuar ele continua o loop de dialogo se retorna SAIR_MAPA ele sai mapa ;3)
+ Resumo técnico do funcionamento do programa JavaQuest
 
-foi adicionado um polimorfismo nos npcs ent agr eles podem ter vontande propria nao agem conforme o loop q o evento deles criam o unico problema é q tem q cria uma classe para cada npc unico(como ele funciona
-é basicamente NPC cria uma base e as outras classes NPCMarcelo etc usa ele pra poder criar algo novo ent pra criar um npc em algum lugar q é necessario por exemplo mapa vc so cria o objeto marcelo ou qualquer outro
-a e npcAtual é basicamente um bagui pra reconhecer se ta num loop de conversa basicamente)
+O programa é um RPG textual desenvolvido em Java utilizando os principais conceitos de Orientação a Objetos, como herança, encapsulamento, polimorfismo e uso de enums para controle de estados.
 
-personagens ficaram mais poliformicos tbm ent tem player q consegue ter suas propria açoes e mobs q podem ter suas proprias açoes diferntes assim como NPC eu sei q o do ramon tem eu so n tava querendo adcionar 
-isso no momento mas agr tem yippe
+A execução começa na classe Main, que instancia o Scanner, chama o MenuPrincipal para criação do personagem e inicializa o mapa com criaMapa. Após isso, o GameLoop é iniciado, sendo responsável pelo fluxo principal do jogo.
 
-é por enquanto é so isso parece pouco pq realmente é as unicas coisas q eu modifiquei foi para deixar mais facil de implementa coisas e deixa a estrutura mais corretinha.
+O GameLoop funciona como uma máquina de estados baseada no enum GameState:
 
+* EXPLORANDO: o jogador navega entre mapas usando direções (NORTE, SUL, etc.)
+* EM_EVENTO: executa eventos específicos do mapa atual
+* GAME_OVER: encerra o jogo
 
+O sistema de mapa é estruturado pela classe Mapa, onde cada instância representa uma região do jogo. Cada mapa possui conexões (norte, sul, leste, oeste) e um tipo definido por TipoMapa. Ao entrar em um mapa, o método aoEntrar é chamado, que decide qual evento ocorre (combate, NPC ou apenas descrição).
 
+Eventos específicos, como na floresta, são tratados pela classe EventoMapa, que pode gerar inimigos (Mobs) e iniciar combates.
 
+A hierarquia de personagens é baseada na classe abstrata Personagens, que contém atributos comuns como HP, ATK e DEF. A classe Player herda de Personagens e adiciona sistema de nível, experiência e evolução de atributos. A classe Mobs também herda de Personagens e representa inimigos, incluindo bosses com comportamentos diferenciados através do atributo "tipo".
+
+O combate é gerenciado pela classe sistemaDeCombate. Ele funciona em turnos:
+
+1. Exibe status dos personagens
+2. Jogador escolhe ação (ATTACK ou DEFEND)
+3. IA do inimigo decide ação (enemyAI)
+4. Aplicação de defesa
+5. Ataque do jogador (com habilidades por classe)
+6. Ataque do inimigo (ou perda de turno caso esteja em stun)
+7. Reset de efeitos temporários
+
+O sistema de ações utiliza a classe sistemaDeAcao, responsável por calcular dano considerando ataque e defesa.
+
+Foram adicionadas mecânicas estratégicas:
+
+* Crítico: chance de causar dano dobrado
+* Esquiva: chance de evitar dano baseada na classe
+* Stun: chance de impedir ação do inimigo por um turno
+* Counter de defesa: reduz dano ao prever ataque
+* IA adaptativa: inimigos reagem ao HP do jogador
+
+As classes possuem habilidades únicas implementadas no método atacarEspecial:
+
+* Cavaleiro: ataque com bônus defensivo
+* Mago: dano alto ignorando defesa
+* Espadachim: múltiplos ataques com chance de crítico
+
+O sistema de progressão permite que, ao subir de nível, o jogador escolha qual atributo deseja evoluir (força, vida ou defesa), tornando o crescimento personalizado.
+
+Os bosses são implementados utilizando a classe Mobs com um atributo "tipo", que altera seu comportamento na IA e adiciona habilidades específicas (ex: ataque duplo, resistência a stun, modo agressivo).
+
+O jogo possui múltiplos finais implementados na sala do rei. Dependendo da escolha do jogador, diferentes endings são exibidos através da classe Ending. Após qualquer final, o estado do jogo é alterado para GAME_OVER, encerrando o loop principal corretamente.
+
+Tratamento de erros foi implementado em todas entradas com Scanner utilizando try/catch para evitar crashes ao inserir valores inválidos.
+
+No geral, o sistema é modular, com separação clara de responsabilidades:
+
+* GameLoop: controle do jogo
+* Mapa/Eventos: exploração
+* Combate: lógica de batalha
+* Player/Mobs: entidades
+* AI: comportamento inimigo
+
+O projeto demonstra uso consistente de OOP, controle de fluxo e implementação de mecânicas típicas de RPG em um ambiente textual.
+
+eu n li nada q essa ia falo mas ta ai

@@ -59,4 +59,14 @@ public class Personagens {
     public void curarTotal() {
         this.hp = this.maxHp;
     }
+    
+    public boolean esquivou() {
+        double chance;
+
+        if (nome.equals("Espadachim")) chance = 0.25;
+        else if (nome.equals("Mago")) chance = 0.15;
+        else chance = 0.10;
+
+        return Math.random() < chance;
+    }
 }

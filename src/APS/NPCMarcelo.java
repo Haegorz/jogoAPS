@@ -15,8 +15,16 @@ public class NPCMarcelo extends NPC {
         System.out.println("2 - Cidade?");
         System.out.println("3 - Sair");
 
-        int op = sc.nextInt();
-        sc.nextLine();
+        int op;
+
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Digite um número válido!");
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
 
         switch (op) {
             case 1:

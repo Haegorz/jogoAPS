@@ -22,8 +22,16 @@ public class EventoMapa {
         System.out.println("1 - Procurar Goblin");
         System.out.println("2 - Sair");
 
-        int op = sc.nextInt();
-        sc.nextLine();
+        int op;
+
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Entrada inválida. Digite um número.");
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
 
         switch (op) {
             case 1:
@@ -46,8 +54,18 @@ public class EventoMapa {
     }
 
     private static void spawnGoblin(Player player, Scanner sc) {
-        System.out.println("Um inimigo apareceu!");
+
+        System.out.println("Um Goblin apareceu!");
+
         Mobs enemy = new Mobs("Goblin", 50, 10, 4, 20);
+
+        // chance de boss
+        if (rand.nextInt(100) < 20) {
+            System.out.println("⚠ Um Goblin Rei apareceu!");
+            enemy = new Mobs("Goblin Rei", 80, 12, 5, 50);
+            enemy.setTipo("AGRESSIVO");
+        }
+
         sistemaDeCombate.iniciarCombate(player, enemy, sc);
     }
 }

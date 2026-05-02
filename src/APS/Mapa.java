@@ -105,11 +105,27 @@ public class Mapa {
                 return ResultadoEvento.SAIR_MAPA;
             
             case MONTANHA:
-                System.out.println("Não tem ninguem na montanha mais...");
+                System.out.println("Um inimigo poderoso surge na montanha!");
+
+                Mobs boss = new Mobs("Cavaleiro Negro", 100, 10, 8, 80);
+                boss.setTipo("TANK");
+
+                sistemaDeCombate.iniciarCombate(player, boss, sc);
+
+                if (!player.vivo()) return ResultadoEvento.MORREU;
+
                 return ResultadoEvento.SAIR_MAPA;
 
             case CAVERNA:
-                System.out.println("A caverna esta vazia...");
+                System.out.println("Uma presença veloz te ataca!");
+
+                Mobs boss1 = new Mobs("Assassino das Sombras", 60, 18, 3, 70);
+                boss1.setTipo("RAPIDO");
+
+                sistemaDeCombate.iniciarCombate(player, boss1, sc);
+
+                if (!player.vivo()) return ResultadoEvento.MORREU;
+
                 return ResultadoEvento.SAIR_MAPA;
                 
             case PLANICES:
@@ -129,8 +145,47 @@ public class Mapa {
                 return ResultadoEvento.SAIR_MAPA;
                 
             case SALA_REI:
-                System.out.println("O rei não esta aqui...");
-                return ResultadoEvento.SAIR_MAPA;
+
+                System.out.println("O REI DAS SOMBRAS aparece!");
+
+                // ===== FASE 1 =====
+                Mobs boss11 = new Mobs("Rei das Sombras", 120, 12, 6, 100);
+                boss11.setTipo("INTELIGENTE");
+
+                sistemaDeCombate.iniciarCombate(player, boss11, sc);
+
+                if (!player.vivo()) return ResultadoEvento.MORREU;
+
+                // ===== ESCOLHA FINAL =====
+                System.out.println("\nO rei cai de joelhos...");
+                System.out.println("1 - Poupar o rei");
+                System.out.println("2 - Finalizar o rei");
+
+                int escolha = sc.nextInt();
+                sc.nextLine();
+
+                if (escolha == 1) {
+
+                    System.out.println("\nO rei sorri...");
+                    System.out.println("Você caiu em uma armadilha!");
+
+                    // ===== FASE 2 (SURPRESA) =====
+                    Mobs bossFinal = new Mobs("Rei das Sombras (Forma Verdadeira)", 150, 18, 8, 200);
+                    bossFinal.setTipo("AGRESSIVO");
+
+                    sistemaDeCombate.iniciarCombate(player, bossFinal, sc);
+
+                    if (!player.vivo()) {
+                    	Ending.finalRuim();
+                    	return ResultadoEvento.MORREU;
+                    }
+                    Ending.finalSecreto();
+                    return ResultadoEvento.MORREU;
+
+                } else {
+                	Ending.finalBom();
+                	return ResultadoEvento.MORREU;
+                }
 
             default:
                 return ResultadoEvento.CONTINUAR;
