@@ -1,5 +1,6 @@
 package APS;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -9,9 +10,15 @@ public class Player extends Personagens{
     private int level = 1;
     private int exp = 0;
     private int proximoLevel = 50;
+	private EquipItem armadura;
+    private EquipItem arma;
+    private HashMap<String, Integer> inventario;
+    private HashMap<String, Item> catalogo;
     
 	public Player(String nome, int hp, int atk, int def) {
 		super(nome, hp, atk, def);
+		this.inventario = new HashMap<>();
+        this.catalogo = new HashMap<>();
 	}
 	
 	public int getLevel() {
@@ -22,9 +29,20 @@ public class Player extends Personagens{
 	    exp += quantidade;
 
 	    while (exp >= proximoLevel) {
-	    	subirNivel(sc);;
+	    	subirNivel(sc);
 	    }
 	}
+	
+	public void getInventario(){
+        for (String item: inventario.keySet()){
+			if (catalogo.get(item) instanceof BattleItem){
+            System.out.println(item + "--------" + inventario.get(item));
+			}else{
+				continue;
+			}
+
+        }
+    }
 
 	private void subirNivel(Scanner sc) {
 	    level++;
@@ -153,4 +171,56 @@ public class Player extends Personagens{
     }
 
     private Set<String> flags = new HashSet<>();
+
+
+	public int usarHp(int valor){
+        int playerHp = getHp() +valor;
+        return playerHp;
+    }
+    
+    public int usarMp(int valor){
+        int playerMp = getMp() + valor;
+        return playerMp;
+    }
+    
+    public void adicionarItem(String nome, Item item, int quantidade) {
+        if(inventario.containsKey(nome)){
+            int novaQuant = inventario.get(nome) + quantidade;
+            inventario.replace(nome, novaQuant);
+
+        }else{
+            inventario.put(nome, quantidade);
+        }
+        catalogo.put(nome, item);
+    }
+
+    public void removerItem(String nome) {
+
+    Integer quantidade = inventario.get(nome);
+
+    if (quantidade != null) {
+        quantidade--;
+
+        if (quantidade <= 0) {
+            inventario.remove(nome);
+        } else {
+            inventario.put(nome, quantidade);
+        }
+    }
+}
+  
+
+    public boolean usarItem(String nome) {
+    Item item = catalogo.get(nome);
+
+    if (item != null) {
+        this.removerItem(nome);
+        ((BattleItem)item).usar(this);
+        return true; 
+    } else {
+        System.out.println("Item não encontrado");
+        return false; 
+    }
+}
+
 }

@@ -5,9 +5,12 @@ public class Personagens {
     protected String nome;
     private int hp;
     private int maxHp;
+    private int mp;
     private int atk;
     private int def;
     private int defTemp = 0;
+    private int maxMp;
+    
 
     public Personagens(String nome, int hp, int atk, int def) {
         this.nome = nome;
@@ -21,6 +24,10 @@ public class Personagens {
     public int getMaxHp() { return maxHp; }
     public int getAtk() { return atk; }
     public int getDefTotal() { return def + defTemp; }
+    public int getMp(){return mp;}
+    public int getMaxMp(){return maxMp;}
+    public void toHp(int valor){hp = valor;}
+    public void setMp(int valor){mp = valor;}
 
     public void setHp(int hp) {
         if (hp < 0) this.hp = 0;

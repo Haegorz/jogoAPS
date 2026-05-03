@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class sistemaDeCombate {
 
+
+
+    
 	public static void iniciarCombate(Player player, Mobs enemy, Scanner sc) {
 
         System.out.println("Combate iniciado!");
@@ -13,8 +16,30 @@ public class sistemaDeCombate {
             sistemaMenu.status(player, enemy);
 
             Action playerAction = sistemaMenu.turnoJogador(player, sc);
-            Action enemyAction = enemyAI.decidir(enemy, player);
 
+            while (true) {
+                Scanner scan = new Scanner(System.in);
+
+                if (playerAction == Action.INV) {
+                    player.getInventario();
+
+                    while (true) {
+                        System.out.println("Digite o Item a ser usado");
+                        String itemToUse = scan.nextLine();
+
+                        if (player.usarItem(itemToUse)) {
+                            break; 
+                        }
+
+                        
+                    }
+                    
+                    break; 
+                }
+
+                break; 
+            }
+            Action enemyAction = enemyAI.decidir(enemy, player);
             // feedback
             if (enemy.getHp() < enemy.getMaxHp() * 0.3) {
                 System.out.println(enemy.getNome() + " parece fraco...");
