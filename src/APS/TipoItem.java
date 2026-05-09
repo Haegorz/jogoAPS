@@ -1,8 +1,9 @@
 package APS;
 
-public enum  TipoItem {
+public enum TipoItem {
+
     HP,
     MP,
-
-
+    ATK,
+    DEF
 }

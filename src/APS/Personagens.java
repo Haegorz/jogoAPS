@@ -3,21 +3,26 @@ package APS;
 public class Personagens {
 
     protected String nome;
-    private int hp;
-    private int maxHp;
-    private int mp;
-    private int atk;
-    private int def;
-    private int defTemp = 0;
-    private int maxMp;
+    protected int hp;
+    protected int maxHp;
+    protected int mp;
+    protected int atk;
+    protected int def;
+    protected int defTemp = 0;
+    protected int maxMp;
+    
     
 
-    public Personagens(String nome, int hp, int atk, int def) {
+    public Personagens(String nome, int hp, int atk, int def, int mp) {
         this.nome = nome;
         this.hp = this.maxHp = hp;
+        this.mp = mp;
+        this.maxMp = mp;
         this.atk = atk;
         this.def = def;
+        
     }
+
 
     public String getNome() { return nome; }
     public int getHp() { return hp; }
@@ -28,6 +33,7 @@ public class Personagens {
     public int getMaxMp(){return maxMp;}
     public void toHp(int valor){hp = valor;}
     public void setMp(int valor){mp = valor;}
+    
 
     public void setHp(int hp) {
         if (hp < 0) this.hp = 0;
@@ -58,6 +64,9 @@ public class Personagens {
     public void aumentarAtk(int valor) {
         this.atk += valor;
     }
+    public void aumentarMaxMp(int valor){
+        this.maxMp += valor;
+    }
 
     public void aumentarDef(int valor) {
         this.def += valor;
@@ -65,6 +74,10 @@ public class Personagens {
 
     public void curarTotal() {
         this.hp = this.maxHp;
+    }
+    public void mpTotal(){
+        this.mp = maxMp;
+
     }
     
     public boolean esquivou() {
@@ -75,5 +88,12 @@ public class Personagens {
         else chance = 0.10;
 
         return Math.random() < chance;
+    }
+    public void curarHp(int valor) {
+    setHp(Math.min(getHp() + valor, getMaxHp()));
+    }
+
+    public void curarMp(int valor) {
+        setMp(Math.min(getMp() + valor, getMaxMp()));
     }
 }

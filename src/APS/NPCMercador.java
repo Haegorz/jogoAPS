@@ -2,13 +2,14 @@ package APS;
 
 import java.util.Scanner;
 
+
 public class NPCMercador extends NPC {
 
     public NPCMercador() {
         super("Mercador");
     }
 
-    @Override
+    
     public ResultadoEvento conversar(Player player, Scanner sc) {
 
         System.out.println("1 - Crompa poçao");

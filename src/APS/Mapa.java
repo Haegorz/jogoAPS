@@ -107,7 +107,7 @@ public class Mapa {
             case MONTANHA:
                 System.out.println("Um inimigo poderoso surge na montanha!");
 
-                Mobs boss = new Mobs("Cavaleiro Negro", 100, 10, 8, 80);
+                Mobs boss = new Mobs("Cavaleiro Negro", 100, 10, 8, 80,1);
                 boss.setTipo("TANK");
 
                 sistemaDeCombate.iniciarCombate(player, boss, sc);
@@ -119,7 +119,7 @@ public class Mapa {
             case CAVERNA:
                 System.out.println("Uma presença veloz te ataca!");
 
-                Mobs boss1 = new Mobs("Assassino das Sombras", 60, 18, 3, 70);
+                Mobs boss1 = new Mobs("Assassino das Sombras", 60, 18, 3, 70,1);
                 boss1.setTipo("RAPIDO");
 
                 sistemaDeCombate.iniciarCombate(player, boss1, sc);
@@ -149,7 +149,7 @@ public class Mapa {
                 System.out.println("O REI DAS SOMBRAS aparece!");
 
                 // ===== FASE 1 =====
-                Mobs boss11 = new Mobs("Rei das Sombras", 120, 12, 6, 100);
+                Mobs boss11 = new Mobs("Rei das Sombras", 120, 12, 6, 100,1);
                 boss11.setTipo("INTELIGENTE");
 
                 sistemaDeCombate.iniciarCombate(player, boss11, sc);
@@ -170,7 +170,7 @@ public class Mapa {
                     System.out.println("Você caiu em uma armadilha!");
 
                     // ===== FASE 2 (SURPRESA) =====
-                    Mobs bossFinal = new Mobs("Rei das Sombras (Forma Verdadeira)", 150, 18, 8, 200);
+                    Mobs bossFinal = new Mobs("Rei das Sombras (Forma Verdadeira)", 150, 18, 8, 200,1);
                     bossFinal.setTipo("AGRESSIVO");
 
                     sistemaDeCombate.iniciarCombate(player, bossFinal, sc);

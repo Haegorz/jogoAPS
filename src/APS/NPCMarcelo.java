@@ -8,7 +8,7 @@ public class NPCMarcelo extends NPC {
         super("Marcelo");
     }
 
-    @Override
+    
     public ResultadoEvento conversar(Player player, Scanner sc) {
 
         System.out.println("1 - Oi");

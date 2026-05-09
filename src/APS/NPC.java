@@ -2,6 +2,7 @@ package APS;
 
 import java.util.Scanner;
 
+
 public class NPC {
 
     protected String nome;

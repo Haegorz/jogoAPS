@@ -1,37 +1,35 @@
 package APS;
 
-public class BattleItem extends Item{
+public class BattleItem extends Item {
+
     private final TipoItem type;
 
-    
-
-    public BattleItem(String nome, TipoItem type){
+    public BattleItem(String nome, TipoItem type) {
         super(nome);
         this.type = type;
-
-
     }
 
-   public void usar(Player player) {
+    public void usar(Personagens alvo) {
+
         switch (type) {
+
             case HP:
-                if((player.getHp() + player.usarHp(20)) > player.getMaxHp()){
-                player.setHp(player.getMaxHp());
-            }else{
-                player.usarHp(20);
-            }
+                alvo.curarHp(20);
+                System.out.println(
+                    alvo.getNome()
+                    + " recuperou HP!"
+                );
+
+                break;
+
             case MP:
-                if((player.getMp() + player.usarMp(20)) > player.getMaxHp()){
-                player.setMp(player.getMaxMp());
-            }else{
-                player.usarMp(20);
-            }
+                alvo.curarMp(20);
+                System.out.println(
+                    alvo.getNome()
+                    + " recuperou MP!"
+                );
+
+                break;
         }
     }
-    }
-
-    
-        
-    
-    
-
+}

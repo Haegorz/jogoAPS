@@ -6,8 +6,8 @@ public class Mobs extends Personagens {
     private String tipo;
     private boolean stun = false;
 
-    public Mobs(String nome, int hp, int atk, int def, int xpDrop) {
-        super(nome, hp, atk, def);
+    public Mobs(String nome, int hp, int atk, int def, int xpDrop, int mp) {
+        super(nome, hp, atk, def, mp);
         this.xpDrop = xpDrop;
     }
 
