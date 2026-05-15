@@ -17,10 +17,9 @@ public class NPCMercador extends NPC {
 
         System.out.println("1 - Poção HP (+20 HP) ........ 20 moedas");
         System.out.println("2 - Poção MP (+20 MP) ........ 15 moedas");
-        System.out.println("3 - Super Poção HP (+20 HP) .. 40 moedas");
-        System.out.println("4 - Espada de Ferro (+5 ATK) . 70 moedas");
-        System.out.println("5 - Armadura de Couro (+4 DEF) 60 moedas");
-        System.out.println("6 - Sair");
+        System.out.println("3 - Espada de Ferro (+5 ATK) . 70 moedas");
+        System.out.println("4 - Armadura de Couro (+4 DEF) 60 moedas");
+        System.out.println("5 - Sair");
 
         int op;
 
@@ -50,11 +49,7 @@ public class NPCMercador extends NPC {
 
                 player.ganharMoedas(-20);
 
-                BattleItem hpPotion =
-                    new BattleItem("Poção HP", TipoItem.HP, 20);
-
-                player.adicionarItem( "Poção HP", hpPotion, 1 );
-
+                player.adicionarItem("pocao_hp", new BattleItem("Poção HP", TipoItem.HP, 20), 1);
                 System.out.println("Você comprou uma Poção HP!");
 
                 return ResultadoEvento.CONTINUAR;
@@ -68,30 +63,11 @@ public class NPCMercador extends NPC {
                 }
 
                 player.ganharMoedas(-15);
-                BattleItem mpPotion = new BattleItem( "Poção MP", TipoItem.MP, 20 );
-                player.adicionarItem( "Poção MP", mpPotion, 1 );
+                player.adicionarItem("pocao_mp", new BattleItem("Poção MP", TipoItem.MP, 20), 1);
                 System.out.println("Você comprou uma Poção MP!");
                 return ResultadoEvento.CONTINUAR;
 
             case 3:
-
-                if (player.getMoedas() < 40) {
-
-                    System.out.println("Moedas insuficientes!");
-                    return ResultadoEvento.CONTINUAR;
-                }
-
-                player.ganharMoedas(-40);
-
-                BattleItem superPotion = new BattleItem( "Super Poção", TipoItem.HP, 50 );
-
-                player.adicionarItem( "Super Poção", superPotion, 2 );
-
-                System.out.println("Você comprou Super Poções!");
-
-                return ResultadoEvento.CONTINUAR;
-
-            case 4:
 
                 if (player.getMoedas() < 70) {
 
@@ -100,12 +76,11 @@ public class NPCMercador extends NPC {
                 }
 
                 player.ganharMoedas(-70);
-                EquipItem espada = new EquipItem( "Espada de Ferro", TipoItem.ATK, 5 );
-                player.adicionarItem( "Espada de Ferro", espada, 1 );
+                player.adicionarItem("espada",new EquipItem("Espada de Ferro",TipoItem.ATK,5),1);
                 System.out.println("Você comprou uma Espada de Ferro!");
                 return ResultadoEvento.CONTINUAR;
 
-            case 5:
+            case 4:
 
                 if (player.getMoedas() < 60) {
 
@@ -114,12 +89,11 @@ public class NPCMercador extends NPC {
                 }
 
                 player.ganharMoedas(-60);
-                EquipItem armadura = new EquipItem( "Armadura de Couro", TipoItem.DEF, 4 );
-                player.adicionarItem( "Armadura de Couro", armadura, 1 );
+                player.adicionarItem("armadura",new EquipItem("Armadura de Couro",TipoItem.DEF,4),1);
                 System.out.println("Você comprou uma Armadura de Couro!");
                 return ResultadoEvento.CONTINUAR;
 
-            case 6:
+            case 5:
                 System.out.println("Mercador: Volte sempre!");
                 return ResultadoEvento.SAIR_MAPA;
 

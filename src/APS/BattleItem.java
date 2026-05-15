@@ -22,28 +22,14 @@ public class BattleItem extends Item {
         switch (type) {
 
             case HP:
-
                 alvo.curarHp(valor);
-
-                System.out.println(
-                    alvo.getNome()
-                    + " recuperou "
-                    + valor
-                    + " HP!"
-                );
+                System.out.println( alvo.getNome() + " recuperou " + valor + " HP!" );
 
                 break;
 
             case MP:
-
                 alvo.curarMp(valor);
-
-                System.out.println(
-                    alvo.getNome()
-                    + " recuperou "
-                    + valor
-                    + " MP!"
-                );
+                System.out.println( alvo.getNome() + " recuperou " + valor + " MP!" );
 
                 break;
         }

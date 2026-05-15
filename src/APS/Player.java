@@ -172,7 +172,6 @@ public class Player extends Personagens {
 				break;
 
 			default:
-				// fallback padrão
 				sistemaDeAcao.atacar(this, inimigo);
 		}
 
@@ -202,13 +201,15 @@ public class Player extends Personagens {
 	}
 
 	public void adicionarItem(String nome, Item item, int quantidade) {
+		nome = nome.toLowerCase();
+
 		if (inventario.containsKey(nome)) {
 			int novaQuant = inventario.get(nome) + quantidade;
 			inventario.replace(nome, novaQuant);
-
 		} else {
 			inventario.put(nome, quantidade);
 		}
+
 		catalogo.put(nome, item);
 	}
 
@@ -228,20 +229,15 @@ public class Player extends Personagens {
 	}
 
 	public boolean usarItem(String nome, Mobs enemy, Player player) {
-
+		nome = nome.toLowerCase();
 		Item item = catalogo.get(nome);
-
 		Integer quantidade = inventario.get(nome);
 
-		if (item == null ||
-				quantidade == null ||
-				quantidade <= 0) {
-
+		if (item == null || quantidade == null || quantidade <= 0) {
 			System.out.println("Item não encontrado!");
 
 			return false;
 		}
-
 
 		if (item instanceof BattleItem) {
 
@@ -269,7 +265,6 @@ public class Player extends Personagens {
 					return false;
 			}
 		}
-
 
 		if (item instanceof EquipItem) {
 
@@ -306,10 +301,7 @@ public class Player extends Personagens {
 				}
 
 				mp -= skill.getCustoMp();
-
-				System.out.println(
-						getNome() + " usou " + skill.getNome());
-
+				System.out.println( getNome() + " usou " + skill.getNome());
 				enemy.receberDano(skill.getDano());
 
 				return true;
@@ -321,23 +313,19 @@ public class Player extends Personagens {
 	}
 
 	public boolean usarItemForaDeBatalha(String nome) {
-
+		nome = nome.toLowerCase();
 		Item item = catalogo.get(nome);
 
 		Integer quantidade = inventario.get(nome);
 
 		if (item == null || quantidade == null || quantidade <= 0) {
-
 			System.out.println("Você não possui esse item.");
-
 			return false;
 		}
 
 		// ITEM DE BATALHA
 		if (item instanceof BattleItem) {
-
 			((BattleItem) item).usar(this);
-
 			removerItem(nome);
 
 			return true;
@@ -345,33 +333,21 @@ public class Player extends Personagens {
 
 		// EQUIPAMENTO
 		if (item instanceof EquipItem) {
-
 			EquipItem equip = (EquipItem) item;
-
 			switch (equip.getType()) {
-
 				case ATK:
-
 					aumentarAtk(equip.status);
-
 					arma = equip;
-
-					System.out.println(
-							equip.getNome()
-									+ " equipada!");
-
+					removerItem(nome);
+					System.out.println(equip.getNome() + " equipada!");
 					break;
 
 				case DEF:
 
 					aumentarDef(equip.status);
-
 					armadura = equip;
-
-					System.out.println(
-							equip.getNome()
-									+ " equipada!");
-
+					removerItem(nome);
+					System.out.println( equip.getNome() + " equipada!");
 					break;
 			}
 

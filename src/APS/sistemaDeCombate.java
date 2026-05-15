@@ -22,9 +22,7 @@ public class sistemaDeCombate {
                 player.mostrarSkills();
 
                 while (true) {
-
                     System.out.println("Digite a magia:");
-
                     String skillEscolhida = sc.nextLine();
 
                     boolean usou = player.usarMagia(skillEscolhida, enemy);
