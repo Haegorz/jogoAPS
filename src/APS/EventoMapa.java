@@ -7,21 +7,24 @@ public class EventoMapa {
 
     private static Random rand = new Random();
 
-    public static ResultadoEvento eventoFloresta(Player player, Scanner sc) {
+    public static ResultadoEvento eventoA1( Player player, Scanner sc ) {
 
-        // Evento ao entrar
         if (rand.nextInt(100) < 25) {
-            spawnGoblin(player, sc);
-            if (!player.vivo())
+
+            spawnLixoFraco(player, sc);
+
+            if (!player.vivo()) {
                 return ResultadoEvento.MORREU;
+            }
+
         } else {
-            System.out.println("A floresta está silenciosa...");
+
+            System.out.println("A área está silenciosa..." );
         }
 
-        // Menu
-        System.out.println("opções da floresta");
-        System.out.println("1 - Procurar Goblin");
-        System.out.println("2 - Inventario");
+        System.out.println("\n=== A1 ===");
+        System.out.println("1 - Procurar inimigos");
+        System.out.println("2 - Inventário");
         System.out.println("3 - Sair");
 
         int op;
@@ -29,19 +32,23 @@ public class EventoMapa {
         try {
             op = sc.nextInt();
             sc.nextLine();
+
         } catch (Exception e) {
-            System.out.println("Entrada inválida. Digite um número.");
+
+            System.out.println(
+                "Entrada inválida."
+            );
+
             sc.nextLine();
+
             return ResultadoEvento.CONTINUAR;
         }
 
         switch (op) {
 
             case 1:
-
                 if (rand.nextInt(100) < 75) {
-
-                    spawnGoblin(player, sc);
+                    spawnLixoFraco(player, sc);
 
                     if (!player.vivo()) {
                         return ResultadoEvento.MORREU;
@@ -49,67 +56,204 @@ public class EventoMapa {
 
                 } else {
 
-                    System.out.println(
-                            "Nenhum goblin perto...");
+                    System.out.println("Nenhum inimigo encontrado...");
                 }
 
                 return ResultadoEvento.CONTINUAR;
 
             case 2:
+                abrirInventario(player, sc);
+                return ResultadoEvento.CONTINUAR;
 
-                player.getInventario();
+            case 3:
+                return ResultadoEvento.SAIR_MAPA;
+        }
 
-                while (true) {
+        return ResultadoEvento.CONTINUAR;
+    }
 
-                    System.out.println(
-                            "Digite o item para usar");
 
-                    System.out.println(
-                            "(Digite sair para voltar)");
+    public static ResultadoEvento eventoA2( Player player, Scanner sc ) {
 
-                    String item = sc.nextLine();
+        if (rand.nextInt(100) < 35) {
+            spawnLixoMedio(player, sc);
 
-                    if (item.equalsIgnoreCase("sair")) {
-                        break;
+            if (!player.vivo()) {
+                return ResultadoEvento.MORREU;
+            }
+
+        } else {
+            System.out.println( "Você escuta barulhos metálicos ao longe...");
+        }
+
+        System.out.println("\n=== A2 ===");
+        System.out.println("1 - Explorar sucata");
+        System.out.println("2 - Inventário");
+        System.out.println("3 - Sair");
+
+        int op;
+
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+
+        } catch (Exception e) {
+            System.out.println(
+                "Entrada inválida."
+            );
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
+
+        switch (op) {
+
+            case 1:
+                if (rand.nextInt(100) < 80) {
+                    spawnLixoMedio(player, sc);
+                    if (!player.vivo()) {
+                        return ResultadoEvento.MORREU;
                     }
 
-                    boolean usou = player.usarItemForaDeBatalha(item);
-
-                    if (usou) {
-                        break;
-                    }
+                } else {
+                    System.out.println("Nada além de lixo...");
                 }
 
                 return ResultadoEvento.CONTINUAR;
 
+            case 2:
+                abrirInventario(player, sc);
+                return ResultadoEvento.CONTINUAR;
+
             case 3:
-
-                System.out.println(
-                        "Saindo da floresta...");
-
                 return ResultadoEvento.SAIR_MAPA;
+        }
 
-            default:
+        return ResultadoEvento.CONTINUAR;
+    }
 
-                System.out.println("Opção inválida.");
+
+    public static ResultadoEvento eventoA3( Player player, Scanner sc ) {
+
+        if (rand.nextInt(100) < 45) {
+            spawnLixoForte(player, sc);
+
+            if (!player.vivo()) {
+                return ResultadoEvento.MORREU;
+            }
+
+        } else {
+            System.out.println("O cheiro tóxico domina a área...");
+        }
+
+        System.out.println("\n=== A3 ===");
+        System.out.println("1 - Vasculhar área tóxica");
+        System.out.println("2 - Inventário");
+        System.out.println("3 - Sair");
+
+        int op;
+
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+
+        } catch (Exception e) {
+            System.out.println(
+                "Entrada inválida."
+            );
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
+
+        switch (op) {
+
+            case 1:
+                if (rand.nextInt(100) < 85) {
+
+                    spawnLixoForte(player, sc);
+
+                    if (!player.vivo()) {
+                        return ResultadoEvento.MORREU;
+                    }
+
+                } else {
+                    System.out.println( "Você não encontrou nada..." );
+                }
 
                 return ResultadoEvento.CONTINUAR;
+
+            case 2:
+                abrirInventario(player, sc);
+                return ResultadoEvento.CONTINUAR;
+
+            case 3:
+                return ResultadoEvento.SAIR_MAPA;
+        }
+
+        return ResultadoEvento.CONTINUAR;
+    }
+
+
+    private static void abrirInventario( Player player, Scanner sc ) {
+
+        player.getInventario();
+        while (true) {
+            System.out.println("Digite o item para usar");
+            System.out.println("(Digite sair para voltar)");
+            String item = sc.nextLine();
+
+            if (item.equalsIgnoreCase("sair")) {
+                break;
+            }
+
+            boolean usou = player.usarItemForaDeBatalha(item);
+
+            if (usou) {
+                break;
+            }
         }
     }
 
-    private static void spawnGoblin(Player player, Scanner sc) {
+    private static void spawnLixoFraco( Player player, Scanner sc ) {
 
-        System.out.println("Um Goblin apareceu!");
+        System.out.println("Um Monstro de Plástico apareceu!");
+        Mobs enemy = new Mobs( "Monstro de Plástico", 45, 8, 3, 20, 1, 12 );
 
-        Mobs enemy = new Mobs("Goblin", 50, 10, 4, 20, 1);
-
-        // chance de boss
         if (rand.nextInt(100) < 20) {
-            System.out.println("⚠ Um Goblin Rei apareceu!");
-            enemy = new Mobs("Goblin Rei", 80, 12, 5, 50, 1);
+
+            System.out.println("⚠ Uma Garrafa Assassina apareceu!");
+            enemy = new Mobs( "Garrafa Assassina", 65, 10, 4, 35, 1, 25 );
+            enemy.setTipo("RAPIDO");
+        }
+        sistemaDeCombate.iniciarCombate(player,enemy,sc);
+    }
+
+    
+    private static void spawnLixoMedio( Player player, Scanner sc ) {
+
+        System.out.println( "Um Ferro Velho Vivo apareceu!" );
+        Mobs enemy = new Mobs( "Ferro Velho Vivo", 70, 12, 6, 50, 1, 35 );
+
+        if (rand.nextInt(100) < 25) {
+            System.out.println( "⚠ Um Triturador apareceu!" );
+            enemy = new Mobs( "Triturador", 100, 15, 8, 80, 1, 60 );
+            enemy.setTipo("TANK");
+        }
+        sistemaDeCombate.iniciarCombate(player,enemy,sc);
+    }
+
+ 
+    private static void spawnLixoForte( Player player, Scanner sc ) {
+
+        System.out.println( "Uma Massa Tóxica apareceu!" );
+        Mobs enemy = new Mobs( "Massa Tóxica", 110, 18, 10, 100, 1, 80 );
+
+        if (rand.nextInt(100) < 30) {
+
+            System.out.println( "⚠ O Rei do Lixão apareceu!" ); 
+            enemy = new Mobs( "Grande Lixão", 160, 22, 12, 150, 1, 120 );
             enemy.setTipo("AGRESSIVO");
         }
 
-        sistemaDeCombate.iniciarCombate(player, enemy, sc);
+        sistemaDeCombate.iniciarCombate(player,enemy,sc);
     }
 }

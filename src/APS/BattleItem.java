@@ -3,10 +3,18 @@ package APS;
 public class BattleItem extends Item {
 
     private final TipoItem type;
+    private final int valor;
 
-    public BattleItem(String nome, TipoItem type) {
+    public BattleItem(String nome, TipoItem type, int valor) {
+
         super(nome);
+
         this.type = type;
+        this.valor = valor;
+    }
+
+    public TipoItem getType() {
+        return type;
     }
 
     public void usar(Personagens alvo) {
@@ -14,19 +22,27 @@ public class BattleItem extends Item {
         switch (type) {
 
             case HP:
-                alvo.curarHp(20);
+
+                alvo.curarHp(valor);
+
                 System.out.println(
                     alvo.getNome()
-                    + " recuperou HP!"
+                    + " recuperou "
+                    + valor
+                    + " HP!"
                 );
 
                 break;
 
             case MP:
-                alvo.curarMp(20);
+
+                alvo.curarMp(valor);
+
                 System.out.println(
                     alvo.getNome()
-                    + " recuperou MP!"
+                    + " recuperou "
+                    + valor
+                    + " MP!"
                 );
 
                 break;

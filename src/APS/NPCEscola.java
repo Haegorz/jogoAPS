@@ -2,17 +2,17 @@ package APS;
 
 import java.util.Scanner;
 
-public class NPCMarcelo extends NPC {
+public class NPCEscola extends NPC {
 
-    public NPCMarcelo() {
-        super("Marcelo");
+    public NPCEscola() {
+        super("Ito");
     }
 
     
     public ResultadoEvento conversar(Player player, Scanner sc) {
 
         System.out.println("1 - Oi");
-        System.out.println("2 - Cidade?");
+        System.out.println("2 - ...");
         System.out.println("3 - Sair");
 
         int op;
@@ -28,11 +28,11 @@ public class NPCMarcelo extends NPC {
 
         switch (op) {
             case 1:
-                System.out.println("Marcola: oi ;3.");
+                System.out.println("Ito: Deviam ter reciclado...");
                 return ResultadoEvento.CONTINUAR;
 
             case 2:
-                System.out.println("Marcelinho: Cidade de <placeholder>.");
+                System.out.println("Ito: Não poupe seu inimigo!");
                 return ResultadoEvento.CONTINUAR;
 
             case 3:

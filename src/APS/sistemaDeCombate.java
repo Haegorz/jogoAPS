@@ -15,10 +15,8 @@ public class sistemaDeCombate {
 
             Action playerAction = sistemaMenu.turnoJogador(player, sc);
 
-            // ======================
-            // MAGIAS
-            // ======================
 
+            // MAGIAS
             if (playerAction == Action.MAGIA) {
 
                 player.mostrarSkills();
@@ -37,10 +35,8 @@ public class sistemaDeCombate {
                 }
             }
 
-            // ======================
-            // INVENTARIO
-            // ======================
 
+            // INVENTARIO
             if (playerAction == Action.INV) {
 
                 player.getInventario();
@@ -59,10 +55,8 @@ public class sistemaDeCombate {
                 }
             }
 
-            // ======================
-            // IA INIMIGA
-            // ======================
 
+            // IA INIMIGA
             Action enemyAction = enemyAI.decidir(enemy, player);
 
             // feedback
@@ -70,10 +64,8 @@ public class sistemaDeCombate {
                 System.out.println(enemy.getNome() + " parece fraco...");
             }
 
-            // ======================
-            // DEFESA PLAYER
-            // ======================
 
+            // DEFESA PLAYER
             if (playerAction == Action.DEFEND) {
 
                 int defesa = 3 + (int) (Math.random() * 5);
@@ -85,10 +77,8 @@ public class sistemaDeCombate {
                 );
             }
 
-            // ======================
-            // DEFESA INIMIGO
-            // ======================
 
+            // DEFESA INIMIGO
             if (enemyAction == Action.DEFEND) {
 
                 enemy.defender(5);
@@ -107,10 +97,8 @@ public class sistemaDeCombate {
                 );
             }
 
-            // ======================
-            // HABILIDADE AGRESSIVA
-            // ======================
 
+            // HABILIDADE AGRESSIVA
             if (enemy.getTipo() != null &&
                 enemy.getTipo().equals("AGRESSIVO")) {
 
@@ -122,10 +110,8 @@ public class sistemaDeCombate {
                 }
             }
 
-            // ======================
-            // QUEBRA DEFESA
-            // ======================
 
+            // QUEBRA DEFESA
             if (playerAction == Action.DEFEND &&
                 Math.random() < 0.3) {
 
@@ -136,18 +122,16 @@ public class sistemaDeCombate {
                 player.receberDano(5);
             }
 
-            // ======================
-            // ATAQUE PLAYER
-            // ======================
 
+            // ATAQUE PLAYER
             if (playerAction == Action.ATTACK) {
 
                 player.atacarEspecial(enemy);
             }
 
-            // ======================
+
             // TURNO INIMIGO
-            // ======================
+
 
             if (enemy.isStun()) {
 
@@ -173,7 +157,7 @@ public class sistemaDeCombate {
                     );
                 }
 
-                // habilidades especiais
+                // HABBILIDADES ESPECIAIS
                 if (enemy.getTipo() != null) {
 
                     if (enemy.getTipo().equals("AGRESSIVO") &&
@@ -200,31 +184,29 @@ public class sistemaDeCombate {
                 sistemaDeAcao.atacar(enemy, player);
             }
 
-            // ======================
-            // RESET TURNO
-            // ======================
 
+            // RESET TURNO
             player.resetTurno();
             enemy.resetTurno();
         }
 
-        // ======================
+  
         // RESULTADO FINAL
-        // ======================
-
         sistemaMenu.status(player, enemy);
 
         System.out.println("\n===== RESULTADO =====");
 
         if (player.vivo()) {
-
+            
             System.out.println("Você venceu!");
 
             System.out.println(
                 "EXP ganho: " + enemy.getXpDrop()
+                + "\nDinheiro ganho: " + enemy.getMoedasDrop()
             );
 
             player.ganharXP(enemy.getXpDrop(), sc);
+            player.ganharMoedas(enemy.getMoedasDrop());
 
         } else {
 

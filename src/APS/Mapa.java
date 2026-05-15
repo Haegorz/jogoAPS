@@ -13,8 +13,10 @@ public class Mapa {
     private Mapa oeste;
 
     private NPC npcAtual = null;
-    private NPC npc1 = new NPCMarcelo();
+    private NPC npc1 = new NPCEscola();
     private NPC npc2 = new NPCMercador();
+    private NPC gamble = new NPCGambler();
+    private NPC hotelNPC = new NPCHotel();
 
     public Mapa(TipoMapa tipo, String nome) {
         this.tipo = tipo;
@@ -94,20 +96,36 @@ public class Mapa {
 
         switch (tipo) {
 
-            case FLORESTA:
-                return EventoMapa.eventoFloresta(player, sc);
+            case A1:
+                return EventoMapa.eventoA1(player, sc);
 
-            case CIDADE:
-                return eventoCidade(player, sc);
+            case ESCOLA:
+                return eventoEscola(player, sc);
 
-            case VILA:
+            case HOTEL:
+                return eventoHotel(player, sc);
+
+            case QUADRA:
+               return eventoQuadra(player, sc);
+                
+            case CASA_MUNCKS:
                 System.out.println("Lugar tranquilo.");
-                return ResultadoEvento.SAIR_MAPA;
-            
-            case MONTANHA:
-                System.out.println("Um inimigo poderoso surge na montanha!");
+                System.out.println("1-Descançar");
+                System.out.println("2-Sair");
+                int op = sc.nextInt();
+                sc.nextLine();
+                switch (op){
+                    case 1:
+                        player.curarTotal();
+                        break;
+                    case 2:
+                        return ResultadoEvento.SAIR_MAPA;
+                }
 
-                Mobs boss = new Mobs("Cavaleiro Negro", 100, 10, 8, 80,1);
+            case PARQUE:
+                System.out.println("Um inimigo poderoso surge na Area!");
+
+                Mobs boss = new Mobs( "Guardião de Ferro", 120, 15, 8, 80, 0, 100 );
                 boss.setTipo("TANK");
 
                 sistemaDeCombate.iniciarCombate(player, boss, sc);
@@ -116,10 +134,10 @@ public class Mapa {
 
                 return ResultadoEvento.SAIR_MAPA;
 
-            case CAVERNA:
+            case MERCADO:
                 System.out.println("Uma presença veloz te ataca!");
 
-                Mobs boss1 = new Mobs("Assassino das Sombras", 60, 18, 3, 70,1);
+                Mobs boss1 = new Mobs( "Lâmina de Vidro", 110, 20, 3, 100, 1, 170 );
                 boss1.setTipo("RAPIDO");
 
                 sistemaDeCombate.iniciarCombate(player, boss1, sc);
@@ -128,28 +146,33 @@ public class Mapa {
 
                 return ResultadoEvento.SAIR_MAPA;
                 
-            case PLANICES:
-                System.out.println("As planices estao silenciosas...");
+            case BIBLIOTECA:
+                System.out.println("Uma presença veloz te ataca!");
+
+                Mobs boss2 = new Mobs( "Paladino da Sucata", 200, 17, 20, 200, 1, 350 );
+                boss2.setTipo("TANK");
+
+                sistemaDeCombate.iniciarCombate(player, boss2, sc);
+
+                if (!player.vivo()) return ResultadoEvento.MORREU;
+
                 return ResultadoEvento.SAIR_MAPA;
                 
-            case FAZENDA:
-                System.out.println("A fazenda está silenciosa...");
-                return ResultadoEvento.SAIR_MAPA;
+            case A2:
+                return EventoMapa.eventoA2(player, sc);
 
             case LOJA:
-                System.out.println("O mercador não esta...");
-                return ResultadoEvento.SAIR_MAPA;
+                return eventoBar(player, sc);
 
-            case CASTELO:
-                System.out.println("O castelo esta vazio...");
-                return ResultadoEvento.SAIR_MAPA;
-                
-            case SALA_REI:
+            case A3:
+                return EventoMapa.eventoA3(player, sc);
+
+            case USINA:
 
                 System.out.println("O REI DAS SOMBRAS aparece!");
 
                 // ===== FASE 1 =====
-                Mobs boss11 = new Mobs("Rei das Sombras", 120, 12, 6, 100,1);
+                Mobs boss11 = new Mobs( "Rei do Lixão", 250, 20, 15, 250, 1, 0 );
                 boss11.setTipo("INTELIGENTE");
 
                 sistemaDeCombate.iniciarCombate(player, boss11, sc);
@@ -170,7 +193,7 @@ public class Mapa {
                     System.out.println("Você caiu em uma armadilha!");
 
                     // ===== FASE 2 (SURPRESA) =====
-                    Mobs bossFinal = new Mobs("Rei das Sombras (Forma Verdadeira)", 150, 18, 8, 200,1);
+                    Mobs bossFinal = new Mobs( "Rei do Lixão Supremo", 150, 30, 20, 250, 1, 0 );
                     bossFinal.setTipo("AGRESSIVO");
 
                     sistemaDeCombate.iniciarCombate(player, bossFinal, sc);
@@ -192,7 +215,7 @@ public class Mapa {
         }
     }
 
-    private ResultadoEvento eventoCidade(Player player, Scanner sc) {
+    private ResultadoEvento eventoEscola(Player player, Scanner sc) {
 
         if (npcAtual != null) {
 
@@ -206,9 +229,9 @@ public class Mapa {
             return r;
         }
 
-        System.out.println("\n=== CIDADE ===");
+        System.out.println("\n=== ESCOLA ===");
         System.out.println("1 - Curar");
-        System.out.println("2 - Falar com Marcelinho mete bala");
+        System.out.println("2 - Falar com Prof. Ito");
         System.out.println("3 - Falar com Mercador");
         System.out.println("4 - Sair");
 
@@ -231,6 +254,127 @@ public class Mapa {
                 return ResultadoEvento.CONTINUAR;
 
             case 4:
+                return ResultadoEvento.SAIR_MAPA;
+        }
+
+        return ResultadoEvento.CONTINUAR;
+    }
+    private ResultadoEvento eventoQuadra(Player player, Scanner sc) {
+
+        if (npcAtual != null) {
+
+            ResultadoEvento r = npcAtual.conversar(player, sc);
+
+            if (r == ResultadoEvento.SAIR_MAPA) {
+                npcAtual = null;
+                return ResultadoEvento.CONTINUAR;
+            }
+
+            return r;
+        }
+
+        System.out.println("\n=== QUADRA ===");
+        System.out.println("1 - Falar com o Cara Suspeito");
+        System.out.println("2 - Sair");
+
+        int op = sc.nextInt();
+        sc.nextLine();
+
+        switch (op) {
+
+            case 1:
+                npcAtual = gamble;
+                return ResultadoEvento.CONTINUAR;
+
+            case 2:
+                return ResultadoEvento.SAIR_MAPA;
+
+            default:
+                System.out.println("Opção inválida!");
+                return ResultadoEvento.CONTINUAR;
+        }
+    }
+    private ResultadoEvento eventoHotel( Player player, Scanner sc ) {
+
+        if (npcAtual != null) {
+
+            ResultadoEvento r =
+                npcAtual.conversar(player, sc);
+
+            if (r == ResultadoEvento.SAIR_MAPA) {
+
+                npcAtual = null;
+
+                return ResultadoEvento.CONTINUAR;
+            }
+
+            return r;
+        }
+
+        System.out.println("\n=== HOTEL ===");
+        System.out.println("1 - Descansar");
+        System.out.println("2 - Falar com Mercador");
+        System.out.println("3 - Falar com Lata de Lixo Falante");
+        System.out.println("4 - Sair");
+
+        int op = sc.nextInt();
+        sc.nextLine();
+
+        switch (op) {
+
+            case 1:
+                player.curarTotal();
+                player.mpTotal();
+
+                System.out.println(
+                    "Você descansou e recuperou tudo!"
+                );
+
+                return ResultadoEvento.CONTINUAR;
+
+            case 2:
+                npcAtual = npc2;
+                return ResultadoEvento.CONTINUAR;
+            case 3:
+                npcAtual = hotelNPC;
+                return ResultadoEvento.CONTINUAR;
+            case 4:
+                return ResultadoEvento.SAIR_MAPA;
+        }
+
+        return ResultadoEvento.CONTINUAR;
+    }
+    private ResultadoEvento eventoBar( Player player, Scanner sc ) {
+
+        if (npcAtual != null) {
+
+            ResultadoEvento r =
+                npcAtual.conversar(player, sc);
+
+            if (r == ResultadoEvento.SAIR_MAPA) {
+
+                npcAtual = null;
+
+                return ResultadoEvento.CONTINUAR;
+            }
+
+            return r;
+        }
+
+        System.out.println("\n=== BAR ===");
+        System.out.println("1 - Falar com Mercador");
+        System.out.println("2 - Sair");
+
+        int op = sc.nextInt();
+        sc.nextLine();
+
+        switch (op) {
+
+            case 1:
+                npcAtual = npc2;
+                return ResultadoEvento.CONTINUAR;
+
+            case 2:
                 return ResultadoEvento.SAIR_MAPA;
         }
 

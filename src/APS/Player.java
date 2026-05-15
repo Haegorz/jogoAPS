@@ -16,16 +16,22 @@ public class Player extends Personagens {
 	private HashMap<String, Integer> inventario;
 	private HashMap<String, Item> catalogo;
 	private ArrayList<Skill> skills;
+	private int moedas;
 
 	public Player(String nome, int hp, int atk, int def, int mp) {
 		super(nome, hp, atk, def, mp);
 		this.inventario = new HashMap<>();
 		this.catalogo = new HashMap<>();
 		skills = new ArrayList<>();
+		this.moedas = 100;
 	}
 
 	public int getLevel() {
 		return level;
+	}
+
+	public void ganharMoedas(int quantidade) {
+		this.moedas += quantidade;
 	}
 
 	public void ganharXP(int quantidade, Scanner sc) {
@@ -222,32 +228,58 @@ public class Player extends Personagens {
 	}
 
 	public boolean usarItem(String nome, Mobs enemy, Player player) {
+
 		Item item = catalogo.get(nome);
 
-		if (item != null) {
-			Scanner scan = new Scanner(System.in);
-			System.out.println("em quem vc gostaria de usar o item?");
-			System.out.println("1-Inimigo");
-			System.out.println("2-Player");
-			int alvo = scan.nextInt();
-			switch (alvo) {
-				case 1:
-					this.removerItem(nome);
-					((BattleItem) item).usar(enemy);
-					return true;
-				case 2:
-					this.removerItem(nome);
-					((BattleItem) item).usar(player);
-					return true;
-				default:
-					System.out.println("alvo não encontrado");
-					return false;
-			}
-		} else {
-			System.out.println("Item não encontrado");
+		Integer quantidade = inventario.get(nome);
+
+		if (item == null ||
+				quantidade == null ||
+				quantidade <= 0) {
+
+			System.out.println("Item não encontrado!");
+
 			return false;
 		}
 
+
+		if (item instanceof BattleItem) {
+
+			Scanner scan = new Scanner(System.in);
+
+			System.out.println("Em quem deseja usar?");
+			System.out.println("1 - Inimigo");
+			System.out.println("2 - Player");
+
+			int alvo = scan.nextInt();
+			scan.nextLine();
+
+			switch (alvo) {
+
+				case 1:
+					removerItem(nome);
+					((BattleItem) item).usar(enemy);
+					return true;
+				case 2:
+					removerItem(nome);
+					((BattleItem) item).usar(player);
+					return true;
+				default:
+					System.out.println("Alvo inválido!");
+					return false;
+			}
+		}
+
+
+		if (item instanceof EquipItem) {
+
+			System.out.println(
+					"Equipamentos não podem ser usados em batalha!");
+
+			return false;
+		}
+
+		return false;
 	}
 
 	public void mostrarSkills() {
@@ -294,12 +326,9 @@ public class Player extends Personagens {
 
 		Integer quantidade = inventario.get(nome);
 
-		if (item == null ||
-				quantidade == null ||
-				quantidade <= 0) {
+		if (item == null || quantidade == null || quantidade <= 0) {
 
-			System.out.println(
-					"Você não possui esse item.");
+			System.out.println("Você não possui esse item.");
 
 			return false;
 		}
@@ -353,5 +382,13 @@ public class Player extends Personagens {
 				"Esse item não pode ser usado agora.");
 
 		return false;
+	}
+
+	public int getMoedas() {
+		return moedas;
+	}
+
+	public int setMoedas(int moedas) {
+		return this.moedas += moedas;
 	}
 }

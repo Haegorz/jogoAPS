@@ -4,45 +4,60 @@ public class criaMapa {
 
     public static Mapa criarMundo() {
 
-    	Mapa vila = new Mapa(TipoMapa.VILA, "Vila");
-    	Mapa floresta = new Mapa(TipoMapa.FLORESTA, "Floresta");
-    	Mapa montanha = new Mapa(TipoMapa.MONTANHA, "Montanha");
-    	Mapa caverna = new Mapa(TipoMapa.CAVERNA, "Caverna");
-    	Mapa cidade = new Mapa(TipoMapa.CIDADE, "Cidade");
-    	Mapa planices = new Mapa(TipoMapa.PLANICES, "Planices");
-    	Mapa fazenda = new Mapa(TipoMapa.FAZENDA, "Fazenda");
-    	Mapa loja2 = new Mapa(TipoMapa.LOJA, "Mercador");
-    	Mapa castelo = new Mapa(TipoMapa.CASTELO, "Portao do Castelo");
-    	Mapa sala_rei = new Mapa(TipoMapa.SALA_REI, "Sala do Trono");
+    	Mapa inicio = new Mapa(TipoMapa.CASA_MUNCKS, "Sua Casa");
+    	Mapa area1 = new Mapa(TipoMapa.A1, "Area 1");
+    	Mapa parque = new Mapa(TipoMapa.PARQUE, "PARQUE");
+    	Mapa mercado = new Mapa(TipoMapa.MERCADO, "mercado");
+    	Mapa escola = new Mapa(TipoMapa.ESCOLA, "Escola");
+    	Mapa biblioteca = new Mapa(TipoMapa.BIBLIOTECA, "Biblioteca");
+    	Mapa area2 = new Mapa(TipoMapa.A2, "Area 2");
+    	Mapa bar = new Mapa(TipoMapa.LOJA, "Mercador");
+        Mapa hotel = new Mapa(TipoMapa.HOTEL, "Hotel");
+    	Mapa area3 = new Mapa(TipoMapa.A3, "Area 3");
+    	Mapa usina = new Mapa(TipoMapa.USINA, "Usina Nuclear");
+        Mapa quadra = new Mapa(TipoMapa.QUADRA, "Quadra de Esportes");
 
-        vila.setNorte(floresta);
+        inicio.setOeste(area1);
 
-        floresta.setSul(vila);
-        floresta.setNorte(montanha);
-        floresta.setLeste(cidade);
+    
 
-        montanha.setSul(floresta);
-        montanha.setNorte(caverna);
+        area1.setLeste(inicio);
+        area1.setNorte(bar);
+        area1.setSul(mercado);
 
-        cidade.setOeste(floresta);
+        bar.setSul(area1);
+
+        mercado.setNorte(area1);
+        mercado.setSul(area2);
+
+        area2.setNorte(mercado);
+        area2.setLeste(escola);
+        area2.setOeste(biblioteca);
+
+        escola.setOeste(area2);
+        escola.setNorte(quadra);
+
+        quadra.setSul(escola);
+
+        biblioteca.setLeste(area2);
+        biblioteca.setOeste(area3);
+
+        area3.setLeste(biblioteca); 
+        area3.setSul(hotel);
+        area3.setOeste(parque);
         
-        caverna.setSul(montanha);
-        caverna.setNorte(planices);
-       
-        planices.setSul(caverna);
-        planices.setNorte(castelo);
-        planices.setLeste(fazenda);
-        planices.setOeste(loja2);
-       
-        fazenda.setOeste(planices);
-       
-        loja2.setLeste(planices);
-      
-        castelo.setSul(planices);
-        castelo.setNorte(sala_rei);
-       
-        sala_rei.setSul(castelo);
+        hotel.setNorte(area3);
+
+        parque.setLeste(area3);
+        parque.setOeste(usina);
+
+        usina.setLeste(parque);
+
+
+
+
         
-        return vila; // mapa inicial pq sim ;3
+        
+        return inicio; // ponto de partida do jogador
     }
 }

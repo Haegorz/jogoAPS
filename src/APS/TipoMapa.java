@@ -1,14 +1,16 @@
 package APS;
 
 public enum TipoMapa {
-    VILA,
-    FLORESTA,
-    CIDADE,
-    MONTANHA,
-    CAVERNA,
-    PLANICES,
-    FAZENDA,
+    CASA_MUNCKS,
+    A1,
+    ESCOLA,
+    PARQUE,
+    MERCADO,
+    BIBLIOTECA,
+    A2,
     LOJA,
-    CASTELO,
-    SALA_REI,
+    A3,
+    USINA,
+    HOTEL,
+    QUADRA,
 }
