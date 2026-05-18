@@ -12,7 +12,7 @@ public class NPCGambler extends NPC {
 
     public ResultadoEvento conversar(Player player, Scanner sc) {
         if (!isVivo) {
-            System.out.println("O cara suspeito não tem mais nada pra te oferecer...");
+            TextControler.textInstant("O cara suspeito não tem mais nada pra te oferecer...");
             return ResultadoEvento.SAIR_MAPA;
         } else {
             System.out.println("1 - Oi");
@@ -34,10 +34,14 @@ public class NPCGambler extends NPC {
             switch (op) {
 
                 case 1:
-                    System.out.println("Suspeito:...");
+                    System.out.print("Suspeito:");
+                    TextControler.textInstant("...\n");
                     return ResultadoEvento.CONTINUAR;
 
                 case 2:
+                    TextControler.textInstant("O cara suspeito sorri e propõe um jogo de dados...\n");
+                    TextControler.textInstant("Aposte o quanto quiser! até mesmo o que não tem...\n");
+                    TextControler.textInstant("Se você ganhar, recebe 1.5x o valor apostado, mas se perder, perde tudo!\n");
                     System.out.println("Quanto vc quer apostar? (Digite um número inteiro)");
 
                     try {
@@ -69,8 +73,7 @@ public class NPCGambler extends NPC {
         if (dado < 4) {
 
             if (player.getMoedas() - aposta < 0) {
-
-                System.out.println("Vai pagar com sua vida então...");
+                TextControler.textInstant("Vai pagar com sua vida então...");
 
                 Mobs secretboos = new Mobs("Igor", 200, player.getHp(), 10, 1, 1, 0);
                 secretboos.setTipo("INTELIGENTE");
@@ -82,12 +85,13 @@ public class NPCGambler extends NPC {
                     return ResultadoEvento.MORREU;
 
                 } else {
+                    isVivo = false;
                     return ResultadoEvento.SAIR_MAPA;
                 }
 
             } else {
 
-                System.out.println("Você perdeu a aposta de " + aposta + " moedas!");
+                TextControler.textInstant("Você perdeu a aposta de " + aposta + " moedas!");
 
                 int resultado = aposta * -1;
                 player.setMoedas(resultado);
@@ -99,7 +103,7 @@ public class NPCGambler extends NPC {
 
             int resultado = (int) (aposta * 1.5);
 
-            System.out.println("Você ganhou " + resultado + " moedas!");
+            TextControler.textInstant("Você ganhou " + resultado + " moedas!");
 
             player.setMoedas(resultado);
 

@@ -28,11 +28,13 @@ public class NPCEscola extends NPC {
 
         switch (op) {
             case 1:
-                System.out.println("Ito: Deviam ter reciclado...");
+                System.out.print("Ito: ");
+                TextControler.textInstant("Deviam ter reciclado...\n");
                 return ResultadoEvento.CONTINUAR;
 
             case 2:
-                System.out.println("Ito: Não poupe seu inimigo!");
+                System.out.print("Ito: Não poupe seu inimigo!");
+                TextControler.textInstant("Não poupe seu inimigo!\n");
                 return ResultadoEvento.CONTINUAR;
 
             case 3:

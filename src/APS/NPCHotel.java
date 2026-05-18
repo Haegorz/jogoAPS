@@ -17,10 +17,12 @@ public class NPCHotel extends NPC {
 
             switch (sc.nextInt()) {
                 case 1:
-                    System.out.println("Lata de lixo: Oi, humano! Bem-vindo ao Hotel Lixo!");
+                    System.out.print("Lata de lixo: ");
+                    TextControler.textInstant("Ei, humano! Bem-vindo ao Hotel Lixo!\n");
                     return ResultadoEvento.CONTINUAR;
                 case 2:
-                    System.out.println("Lata de lixo: Ei, isso é ofensivo!");
+                    System.out.print("Lata de lixo: ");
+                    TextControler.textInstant("Você não tem vergonha?!\n");
                     Mobs secretboos = new Mobs("Gi...", 1, 1, 1, 1, 1, 0);
                     secretboos.setTipo("INTELIGENTE");
 

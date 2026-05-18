@@ -18,6 +18,10 @@ public class Mapa {
     private NPC gamble = new NPCGambler();
     private NPC hotelNPC = new NPCHotel();
 
+    private boolean bossDerrotado = false;
+    private boolean boss2Derrotado = false;
+    private boolean boss3Derrotado = false;
+
     public Mapa(TipoMapa tipo, String nome) {
         this.tipo = tipo;
         this.nome = nome;
@@ -27,18 +31,34 @@ public class Mapa {
         return nome;
     }
 
-    public void setNorte(Mapa mapa) { this.norte = mapa; }
-    public void setSul(Mapa mapa) { this.sul = mapa; }
-    public void setLeste(Mapa mapa) { this.leste = mapa; }
-    public void setOeste(Mapa mapa) { this.oeste = mapa; }
+    public void setNorte(Mapa mapa) {
+        this.norte = mapa;
+    }
+
+    public void setSul(Mapa mapa) {
+        this.sul = mapa;
+    }
+
+    public void setLeste(Mapa mapa) {
+        this.leste = mapa;
+    }
+
+    public void setOeste(Mapa mapa) {
+        this.oeste = mapa;
+    }
 
     public Mapa proximoMapa(Direction direcao) {
         switch (direcao) {
-            case NORTE: return norte;
-            case SUL: return sul;
-            case LESTE: return leste;
-            case OESTE: return oeste;
-            default: return null;
+            case NORTE:
+                return norte;
+            case SUL:
+                return sul;
+            case LESTE:
+                return leste;
+            case OESTE:
+                return oeste;
+            default:
+                return null;
         }
     }
 
@@ -90,9 +110,9 @@ public class Mapa {
 
     public ResultadoEvento aoEntrar(Player player, Scanner sc) {
 
-    	if (npcAtual == null) {
-    	    System.out.println("\nVocê está em: " + nome);
-    	}
+        if (npcAtual == null) {
+            TextControler.textInstant("\nVocê está em: " + nome);
+        }
 
         switch (tipo) {
 
@@ -106,58 +126,72 @@ public class Mapa {
                 return eventoHotel(player, sc);
 
             case QUADRA:
-               return eventoQuadra(player, sc);
-                
+                return eventoQuadra(player, sc);
+
             case CASA_MUNCKS:
-                System.out.println("Lugar tranquilo.");
-                System.out.println("1-Descançar");
-                System.out.println("2-Sair");
-                int op = sc.nextInt();
-                sc.nextLine();
-                switch (op){
-                    case 1:
-                        player.curarTotal();
-                        break;
-                    case 2:
-                        return ResultadoEvento.SAIR_MAPA;
-                }
+                return eventoCasa(player, sc);
 
             case PARQUE:
-                System.out.println("Um inimigo poderoso surge na Area!");
+                if (!boss2Derrotado) {
+                    TextControler.textInstant("Um inimigo poderoso surge na Area!");
 
-                Mobs boss = new Mobs( "Guardião de Ferro", 120, 15, 8, 80, 0, 100 );
-                boss.setTipo("TANK");
+                    Mobs boss = new Mobs("Guardião de Ferro", 120, 15, 8, 80, 0, 100);
+                    boss.setTipo("TANK");
 
-                sistemaDeCombate.iniciarCombate(player, boss, sc);
+                    sistemaDeCombate.iniciarCombate(player, boss, sc);
 
-                if (!player.vivo()) return ResultadoEvento.MORREU;
-
-                return ResultadoEvento.SAIR_MAPA;
+                    if (!player.vivo()) {
+                        return ResultadoEvento.MORREU;
+                    }
+                    bossDerrotado = true;
+                    return ResultadoEvento.SAIR_MAPA;
+                } else {
+                    TextControler.textFast("O parque está vazio, exceto por um banco quebrado.");
+                    return ResultadoEvento.SAIR_MAPA;
+                }
 
             case MERCADO:
-                System.out.println("Uma presença veloz te ataca!");
+                if (!bossDerrotado) {
+                    TextControler.textInstant("Uma presença veloz te ataca!");
 
-                Mobs boss1 = new Mobs( "Lâmina de Vidro", 110, 20, 3, 100, 1, 170 );
-                boss1.setTipo("RAPIDO");
+                    Mobs boss1 = new Mobs("Lâmina de Vidro", 110, 20, 3, 100, 1, 170);
+                    boss1.setTipo("RAPIDO");
+                    
 
-                sistemaDeCombate.iniciarCombate(player, boss1, sc);
+                    sistemaDeCombate.iniciarCombate(player, boss1, sc);
 
-                if (!player.vivo()) return ResultadoEvento.MORREU;
+                    if (!player.vivo()) {
+                        return ResultadoEvento.MORREU;
+                    }
+                    TextControler.textDramatic("Você é forte heroi... \n");
+                    TextControler.textDramatic("mas não o suficiente para derrotar nosso rei!");
+                    bossDerrotado = true;
+                    return ResultadoEvento.SAIR_MAPA;
+                } else {
+                    TextControler.textFast("\nO mercado está vazio, exceto por uma barraca de frutas podres.");
+                    TextControler.textFast("\nPessoas parece estar voltando a frequentar o mercado...");
+                    return ResultadoEvento.SAIR_MAPA;
+                }
 
-                return ResultadoEvento.SAIR_MAPA;
-                
             case BIBLIOTECA:
-                System.out.println("Uma presença veloz te ataca!");
+                if (!boss3Derrotado) {
+                    TextControler.textInstant("Uma presença veloz te ataca!");
 
-                Mobs boss2 = new Mobs( "Paladino da Sucata", 200, 17, 20, 200, 1, 350 );
-                boss2.setTipo("TANK");
+                    Mobs boss2 = new Mobs("Paladino da Sucata", 200, 17, 20, 200, 1, 350);
+                    boss2.setTipo("TANK");
 
-                sistemaDeCombate.iniciarCombate(player, boss2, sc);
+                    sistemaDeCombate.iniciarCombate(player, boss2, sc);
 
-                if (!player.vivo()) return ResultadoEvento.MORREU;
+                    if (!player.vivo()) {
+                        return ResultadoEvento.MORREU;
+                    }
+                    boss3Derrotado = true;
+                    return ResultadoEvento.SAIR_MAPA;
+                } else {
+                    TextControler.textFast("A biblioteca está silenciosa, exceto por um livro empoeirado no chão.");
+                    return ResultadoEvento.SAIR_MAPA;
+                }
 
-                return ResultadoEvento.SAIR_MAPA;
-                
             case A2:
                 return EventoMapa.eventoA2(player, sc);
 
@@ -169,50 +203,54 @@ public class Mapa {
 
             case USINA:
 
-                System.out.println("O REI DAS SOMBRAS aparece!");
+                TextControler.textInstant("\nVocê entra na usina abandonada");
+                TextControler.textDramatic("\nE sente uma presença ameaçadora...\n");
+                TextControler.textFast("O Rei do Lixão aparece, pronto para o confronto final!");
 
                 // ===== FASE 1 =====
-                Mobs boss11 = new Mobs( "Rei do Lixão", 250, 20, 15, 250, 1, 0 );
+                Mobs boss11 = new Mobs("Rei do Lixão", 250, 20, 15, 250, 1, 0);
                 boss11.setTipo("INTELIGENTE");
 
                 sistemaDeCombate.iniciarCombate(player, boss11, sc);
 
-                if (!player.vivo()) return ResultadoEvento.MORREU;
+                if (!player.vivo())
+                    return ResultadoEvento.MORREU;
 
                 // ===== ESCOLHA FINAL =====
-                System.out.println("\nO rei cai de joelhos...");
-                System.out.println("1 - Poupar o rei");
-                System.out.println("2 - Finalizar o rei");
+                TextControler.textDramatic("\nO rei cai de joelhos...");
+                TextControler.textInstant("\n1 - Poupar o rei");
+                TextControler.textInstant("\n2 - Finalizar o rei");
 
                 int escolha = sc.nextInt();
                 sc.nextLine();
 
                 if (escolha == 1) {
 
-                    System.out.println("\nO rei sorri...");
-                    System.out.println("Você caiu em uma armadilha!");
+                    TextControler.textDramatic("\nO rei sorri...");
+                    TextControler.textFast("\nVocê caiu em uma armadilha!");
 
                     // ===== FASE 2 (SURPRESA) =====
-                    Mobs bossFinal = new Mobs( "Rei do Lixão Supremo", 150, 30, 20, 250, 1, 0 );
+                    Mobs bossFinal = new Mobs("Rei do Lixão Supremo", 150, 30, 20, 250, 1, 0);
                     bossFinal.setTipo("AGRESSIVO");
 
                     sistemaDeCombate.iniciarCombate(player, bossFinal, sc);
 
                     if (!player.vivo()) {
-                    	Ending.finalRuim();
-                    	return ResultadoEvento.MORREU;
+                        Ending.finalRuim();
+                        return ResultadoEvento.MORREU;
                     }
                     Ending.finalSecreto();
                     return ResultadoEvento.MORREU;
 
                 } else {
-                	Ending.finalBom();
-                	return ResultadoEvento.MORREU;
+                    Ending.finalBom();
+                    return ResultadoEvento.MORREU;
                 }
 
             default:
                 return ResultadoEvento.CONTINUAR;
         }
+
     }
 
     private ResultadoEvento eventoEscola(Player player, Scanner sc) {
@@ -235,14 +273,21 @@ public class Mapa {
         System.out.println("3 - Falar com Mercador");
         System.out.println("4 - Sair");
 
-        int op = sc.nextInt();
-        sc.nextLine();
+        int op;
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Digite um número válido!");
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
 
         switch (op) {
 
             case 1:
                 player.setHp(player.getMaxHp());
-                System.out.println("Você foi curado!");
+                TextControler.textInstant("Você foi curado!");
                 return ResultadoEvento.CONTINUAR;
 
             case 2:
@@ -259,6 +304,7 @@ public class Mapa {
 
         return ResultadoEvento.CONTINUAR;
     }
+
     private ResultadoEvento eventoQuadra(Player player, Scanner sc) {
 
         if (npcAtual != null) {
@@ -277,8 +323,15 @@ public class Mapa {
         System.out.println("1 - Falar com o Cara Suspeito");
         System.out.println("2 - Sair");
 
-        int op = sc.nextInt();
-        sc.nextLine();
+        int op;
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Digite um número válido!");
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
 
         switch (op) {
 
@@ -294,12 +347,12 @@ public class Mapa {
                 return ResultadoEvento.CONTINUAR;
         }
     }
-    private ResultadoEvento eventoHotel( Player player, Scanner sc ) {
+
+    private ResultadoEvento eventoHotel(Player player, Scanner sc) {
 
         if (npcAtual != null) {
 
-            ResultadoEvento r =
-                npcAtual.conversar(player, sc);
+            ResultadoEvento r = npcAtual.conversar(player, sc);
 
             if (r == ResultadoEvento.SAIR_MAPA) {
 
@@ -317,8 +370,15 @@ public class Mapa {
         System.out.println("3 - Falar com Lata de Lixo Falante");
         System.out.println("4 - Sair");
 
-        int op = sc.nextInt();
-        sc.nextLine();
+        int op;
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Digite um número válido!");
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
 
         switch (op) {
 
@@ -326,9 +386,7 @@ public class Mapa {
                 player.curarTotal();
                 player.mpTotal();
 
-                System.out.println(
-                    "Você descansou e recuperou tudo!"
-                );
+                TextControler.textInstant("Você descansou e recuperou tudo!");
 
                 return ResultadoEvento.CONTINUAR;
 
@@ -344,12 +402,12 @@ public class Mapa {
 
         return ResultadoEvento.CONTINUAR;
     }
-    private ResultadoEvento eventoBar( Player player, Scanner sc ) {
+
+    private ResultadoEvento eventoBar(Player player, Scanner sc) {
 
         if (npcAtual != null) {
 
-            ResultadoEvento r =
-                npcAtual.conversar(player, sc);
+            ResultadoEvento r = npcAtual.conversar(player, sc);
 
             if (r == ResultadoEvento.SAIR_MAPA) {
 
@@ -365,13 +423,49 @@ public class Mapa {
         System.out.println("1 - Falar com Mercador");
         System.out.println("2 - Sair");
 
-        int op = sc.nextInt();
-        sc.nextLine();
+        int op;
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Digite um número válido!");
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
 
         switch (op) {
 
             case 1:
                 npcAtual = npc2;
+                return ResultadoEvento.CONTINUAR;
+
+            case 2:
+                return ResultadoEvento.SAIR_MAPA;
+        }
+
+        return ResultadoEvento.CONTINUAR;
+    }
+
+    private ResultadoEvento eventoCasa(Player player, Scanner sc) {
+        System.out.println("\n=== CASA ===");
+        System.out.println("1 - Descançar");
+        System.out.println("2 - Sair");
+
+        int op;
+        try {
+            op = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Digite um número válido!");
+            sc.nextLine();
+            return ResultadoEvento.CONTINUAR;
+        }
+
+        switch (op) {
+
+            case 1:
+                player.curarTotal();
+                TextControler.textInstant("Você descansou e recuperou toda a vida!");
                 return ResultadoEvento.CONTINUAR;
 
             case 2:

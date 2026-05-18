@@ -43,15 +43,17 @@ public class Player extends Personagens {
 	}
 
 	public void getInventario() {
+		System.out.println("Inventario:");
 		for (String item : inventario.keySet()) {
-			System.out.println(item + "--------" + inventario.get(item));
+
+			System.out.printf("Item: %-20s | QUANTIDADE: %d%n", item, inventario.get(item));
 		}
 	}
 
 	public void getBattleInventario() {
 		for (String item : inventario.keySet()) {
 			if (catalogo.get(item) instanceof BattleItem) {
-				System.out.println(item + "--------" + inventario.get(item));
+				System.out.printf("Item: %-20s | QUANTIDADE: %d%n", item, inventario.get(item));
 			} else {
 				continue;
 			}
@@ -175,8 +177,7 @@ public class Player extends Personagens {
 				sistemaDeAcao.atacar(this, inimigo);
 		}
 
-		// ===== STUN GLOBAL =====
-		if (Math.random() < 0.15) {
+		if (Math.random() < 0.05) {
 			System.out.println("O inimigo ficou atordoado!");
 			inimigo.setStun(true);
 		}
@@ -267,10 +268,7 @@ public class Player extends Personagens {
 		}
 
 		if (item instanceof EquipItem) {
-
-			System.out.println(
-					"Equipamentos não podem ser usados em batalha!");
-
+			System.out.println("Equipamentos não podem ser usados em batalha!");
 			return false;
 		}
 
@@ -282,10 +280,7 @@ public class Player extends Personagens {
 		System.out.println("===== SKILLS =====");
 
 		for (Skill skill : skills) {
-			System.out.println(
-					skill.getNome()
-							+ " | DMG: " + skill.getDano()
-							+ " | MP: " + skill.getCustoMp());
+			System.out.println(skill.getNome() + " | DMG: " + skill.getDano() + " | MP: " + skill.getCustoMp());
 		}
 	}
 
@@ -299,11 +294,9 @@ public class Player extends Personagens {
 					System.out.println("MP insuficiente!");
 					return false;
 				}
-
 				mp -= skill.getCustoMp();
-				System.out.println( getNome() + " usou " + skill.getNome());
+				System.out.println(getNome() + " usou " + skill.getNome());
 				enemy.receberDano(skill.getDano());
-
 				return true;
 			}
 		}
@@ -315,7 +308,6 @@ public class Player extends Personagens {
 	public boolean usarItemForaDeBatalha(String nome) {
 		nome = nome.toLowerCase();
 		Item item = catalogo.get(nome);
-
 		Integer quantidade = inventario.get(nome);
 
 		if (item == null || quantidade == null || quantidade <= 0) {
@@ -323,39 +315,45 @@ public class Player extends Personagens {
 			return false;
 		}
 
-		// ITEM DE BATALHA
 		if (item instanceof BattleItem) {
 			((BattleItem) item).usar(this);
 			removerItem(nome);
-
 			return true;
 		}
 
-		// EQUIPAMENTO
 		if (item instanceof EquipItem) {
 			EquipItem equip = (EquipItem) item;
+
 			switch (equip.getType()) {
+
 				case ATK:
-					aumentarAtk(equip.status);
+					if (arma != null) {
+						diminuirAtk(arma.status);
+						System.out.println(arma.getNome() + " foi desequipada.");
+					}
+
 					arma = equip;
+					aumentarAtk(equip.status);
 					removerItem(nome);
 					System.out.println(equip.getNome() + " equipada!");
 					break;
-
 				case DEF:
+					if (armadura != null) {
+						diminuirDef(armadura.status);
+						System.out.println(armadura.getNome() + " foi desequipada.");
+					}
 
-					aumentarDef(equip.status);
 					armadura = equip;
+					aumentarDef(equip.status);
 					removerItem(nome);
-					System.out.println( equip.getNome() + " equipada!");
+					System.out.println(equip.getNome() + " equipada!");
 					break;
 			}
 
 			return true;
 		}
 
-		System.out.println(
-				"Esse item não pode ser usado agora.");
+		System.out.println("Esse item não pode ser usado agora.");
 
 		return false;
 	}
@@ -366,5 +364,13 @@ public class Player extends Personagens {
 
 	public int setMoedas(int moedas) {
 		return this.moedas += moedas;
+	}
+
+	public void diminuirAtk(int valor) {
+		atk -= valor;
+	}
+
+	public void diminuirDef(int valor) {
+		def -= valor;
 	}
 }

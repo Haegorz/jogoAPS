@@ -76,7 +76,7 @@ public class NPCMercador extends NPC {
                 }
 
                 player.ganharMoedas(-70);
-                player.adicionarItem("espada",new EquipItem("Espada de Ferro",TipoItem.ATK,5),1);
+                player.adicionarItem("espada de ferro",new EquipItem("Espada de Ferro",TipoItem.ATK,5),1);
                 System.out.println("Você comprou uma Espada de Ferro!");
                 return ResultadoEvento.CONTINUAR;
 
@@ -89,7 +89,7 @@ public class NPCMercador extends NPC {
                 }
 
                 player.ganharMoedas(-60);
-                player.adicionarItem("armadura",new EquipItem("Armadura de Couro",TipoItem.DEF,4),1);
+                player.adicionarItem("armadura de couro",new EquipItem("Armadura de Couro",TipoItem.DEF,4),1);
                 System.out.println("Você comprou uma Armadura de Couro!");
                 return ResultadoEvento.CONTINUAR;
 

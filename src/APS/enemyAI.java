@@ -21,9 +21,14 @@ public class enemyAI {
                     return Action.ATTACK;
 
                 case "TANK":
-                    if (enemy.getHp() < enemy.getMaxHp() * 0.5) {
-                        System.out.println(enemy.getNome() + " levanta sua guarda!");
-                        return Action.DEFEND;
+                    if (enemy.getHp() < enemy.getMaxHp() * 0.25) {
+                        if(Math.random() < 0.5) {
+                            System.out.println(enemy.getNome() + " levanta sua guarda!");
+                            return Action.DEFEND;
+                        } else {
+                            System.out.println(enemy.getNome() + " se mantém firme!");
+                            return Action.ATTACK;
+                        }
                     }
                     return Action.ATTACK;
 

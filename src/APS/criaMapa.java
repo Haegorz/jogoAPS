@@ -5,7 +5,7 @@ public class criaMapa {
     public static Mapa criarMundo() {
 
     	Mapa inicio = new Mapa(TipoMapa.CASA_MUNCKS, "Sua Casa");
-    	Mapa area1 = new Mapa(TipoMapa.A1, "Area 1");
+    	Mapa area1 = new Mapa(TipoMapa.A1, "Area 1 ");
     	Mapa parque = new Mapa(TipoMapa.PARQUE, "PARQUE");
     	Mapa mercado = new Mapa(TipoMapa.MERCADO, "mercado");
     	Mapa escola = new Mapa(TipoMapa.ESCOLA, "Escola");
