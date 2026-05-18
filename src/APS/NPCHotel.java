@@ -25,7 +25,7 @@ public class NPCHotel extends NPC {
                     TextControler.textInstant("Você não tem vergonha?!\n");
                     Mobs secretboos = new Mobs("Gi...", 1, 1, 1, 1, 1, 0);
                     secretboos.setTipo("INTELIGENTE");
-
+                    player.setKillCount(player.getKillCount() - 10);
                     sistemaDeCombate.iniciarCombate(player, secretboos, sc);
 
                     if (!player.vivo()) {
@@ -34,6 +34,9 @@ public class NPCHotel extends NPC {
 
                     } else {
                         isVivo = false;
+                        player.setBadKarma(1);
+                        TextControler.textFast("Você pega a tampa da lata de lixo como recompensa!\n");
+                        player.adicionarItem("Capacete de lata",new EquipItem("Capacete de lata",TipoItem.DEF,30),1);
                         return ResultadoEvento.SAIR_MAPA;
                     }
                 case 3:

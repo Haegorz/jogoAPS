@@ -17,6 +17,8 @@ public class Player extends Personagens {
 	private HashMap<String, Item> catalogo;
 	private ArrayList<Skill> skills;
 	private int moedas;
+	private int killCount;
+	private int badKarma;
 
 	public Player(String nome, int hp, int atk, int def, int mp) {
 		super(nome, hp, atk, def, mp);
@@ -24,10 +26,25 @@ public class Player extends Personagens {
 		this.catalogo = new HashMap<>();
 		skills = new ArrayList<>();
 		this.moedas = 100;
+		this.killCount = 0;
+		badKarma = 0;
 	}
-
+	public int getBadKarma() {
+		return badKarma;
+	}
+	public void setBadKarma(int badKarma) {
+		this.badKarma += badKarma;
+	}
 	public int getLevel() {
 		return level;
+	}
+
+	public int getKillCount() {
+		return killCount;
+	}
+
+	public void setKillCount(int killCount) {
+		this.killCount = killCount;
 	}
 
 	public void ganharMoedas(int quantidade) {
@@ -72,9 +89,9 @@ public class Player extends Personagens {
 
 		while (true) {
 			System.out.println("\nEscolha um atributo para evoluir:");
-			System.out.println("1 - Força (ATK +3)");
+			System.out.println("1 - Força (ATK +5)");
 			System.out.println("2 - Vitalidade (HP +15)");
-			System.out.println("3 - Defesa (DEF +2)");
+			System.out.println("3 - Defesa (DEF +5)");
 			System.out.println("4 - Magia (MP+10) ");
 
 			try {
@@ -83,7 +100,7 @@ public class Player extends Personagens {
 
 				switch (escolha) {
 					case 1:
-						aumentarAtk(3);
+						aumentarAtk(5);
 						System.out.println("Força aumentada!");
 						break;
 
@@ -93,7 +110,7 @@ public class Player extends Personagens {
 						break;
 
 					case 3:
-						aumentarDef(2);
+						aumentarDef(5);
 						System.out.println("Defesa aumentada!");
 						break;
 					case 4:
@@ -373,4 +390,51 @@ public class Player extends Personagens {
 	public void diminuirDef(int valor) {
 		def -= valor;
 	}
+
+	public void statUper() {
+		int counter = killCount;
+		switch (counter) {
+			case 10:
+				aumento();
+				break;
+			case 20:
+				aumento();
+				break;
+			case 30:
+				aumento();
+				break;
+			case 40:
+				aumento();
+				this.aprenderSkill(new Skill("Recicle", 50, 70));
+				break;
+			case 50:
+				aumento();
+				break;
+			case 60:
+				aumento();
+				break;
+			case 70:
+				aumento();
+				break;
+			case 80:
+				aumento();
+				break;
+			case 90:
+				aumento();
+				break;
+			case 100:
+				aumento();
+				break;
+
+		}
+
+	}
+
+	public void aumento() {
+		aumentarMaxHp(10);
+		aumentarAtk(10);
+		aumentarDef(10);
+		aumentarMaxMp(10);
+	}
+
 }

@@ -19,7 +19,7 @@ public class EventoMapa {
 
         } else {
 
-            System.out.println("A área está silenciosa..." );
+            TextControler.textInstant(" A área está silenciosa..." );
         }
 
         System.out.println("\n=== A1 ===");
@@ -83,7 +83,7 @@ public class EventoMapa {
             }
 
         } else {
-            System.out.println( "Você escuta barulhos metálicos ao longe...");
+            TextControler.textInstant(" Você escuta barulhos metálicos ao longe...");
         }
 
         System.out.println("\n=== A2 ===");
@@ -216,13 +216,15 @@ public class EventoMapa {
     private static void spawnLixoFraco( Player player, Scanner sc ) {
 
         System.out.println("Um Monstro de Plástico apareceu!");
-        Mobs enemy = new Mobs( "Monstro de Plástico", 45, 8, 3, 20, 1, 12 );
+        Mobs enemy = new Mobs( "Monstro de Plástico", 45, 8, 5, 30, 1, 12 );
+        enemy.escalarComPlayer(player.getLevel());
 
         if (rand.nextInt(100) < 20) {
 
             System.out.println("⚠ Uma Garrafa Assassina apareceu!");
-            enemy = new Mobs( "Garrafa Assassina", 65, 10, 4, 35, 1, 25 );
+            enemy = new Mobs( "Garrafa Assassina", 65, 15, 6, 55, 1, 25 );
             enemy.setTipo("RAPIDO");
+            enemy.bossEscale(player.getLevel());
         }
         sistemaDeCombate.iniciarCombate(player,enemy,sc);
     }
@@ -231,12 +233,15 @@ public class EventoMapa {
     private static void spawnLixoMedio( Player player, Scanner sc ) {
 
         System.out.println( "Um Ferro Velho Vivo apareceu!" );
-        Mobs enemy = new Mobs( "Ferro Velho Vivo", 70, 12, 6, 50, 1, 35 );
+        Mobs enemy = new Mobs( "Ferro Velho Vivo", 80, 16, 15, 50, 1, 35 );
+        enemy.escalarComPlayer(player.getLevel());
+        
 
         if (rand.nextInt(100) < 25) {
             System.out.println( "⚠ Um Triturador apareceu!" );
-            enemy = new Mobs( "Triturador", 100, 15, 8, 80, 1, 60 );
+            enemy = new Mobs( "Triturador", 120, 15, 15, 80, 1, 60 );
             enemy.setTipo("TANK");
+            enemy.bossEscale(player.getLevel());
         }
         sistemaDeCombate.iniciarCombate(player,enemy,sc);
     }
@@ -245,13 +250,15 @@ public class EventoMapa {
     private static void spawnLixoForte( Player player, Scanner sc ) {
 
         System.out.println( "Uma Massa Tóxica apareceu!" );
-        Mobs enemy = new Mobs( "Massa Tóxica", 110, 18, 10, 100, 1, 80 );
-
+        Mobs enemy = new Mobs( "Massa Tóxica", 150, 18, 10, 100, 1, 80 );
+        enemy.escalarComPlayer(player.getLevel());
+        
         if (rand.nextInt(100) < 30) {
 
             System.out.println( "⚠ O Rei do Lixão apareceu!" ); 
-            enemy = new Mobs( "Grande Lixão", 160, 22, 12, 150, 1, 120 );
+            enemy = new Mobs( "Grande Lixão", 200, 22, 12, 150, 1, 120 );
             enemy.setTipo("AGRESSIVO");
+            enemy.bossEscale(player.getLevel());
         }
 
         sistemaDeCombate.iniciarCombate(player,enemy,sc);

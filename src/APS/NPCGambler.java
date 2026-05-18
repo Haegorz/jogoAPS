@@ -1,6 +1,7 @@
 package APS;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class NPCGambler extends NPC {
@@ -75,9 +76,10 @@ public class NPCGambler extends NPC {
             if (player.getMoedas() - aposta < 0) {
                 TextControler.textInstant("Vai pagar com sua vida então...");
 
-                Mobs secretboos = new Mobs("Igor", 200, player.getHp(), 10, 1, 1, 0);
+                Mobs secretboos = new Mobs("Igor", 300, player.getHp() * 2, player.getAtk() - 15, 100, 1, 0);
                 secretboos.setTipo("INTELIGENTE");
 
+                player.setKillCount(player.getKillCount() + 9);
                 sistemaDeCombate.iniciarCombate(player, secretboos, sc);
 
                 if (!player.vivo()) {
@@ -86,12 +88,15 @@ public class NPCGambler extends NPC {
 
                 } else {
                     isVivo = false;
+                    player.setBadKarma(1);
+                    TextControler.textFast("Você sente uma estranha sensação de poder ao derrotar o cara suspeito...\n");
+                    player.aprenderSkill(new Skill("Apostar", (int)(new Random().nextInt(100)), (int)(new Random().nextInt(100))));
                     return ResultadoEvento.SAIR_MAPA;
                 }
 
             } else {
 
-                TextControler.textInstant("Você perdeu a aposta de " + aposta + " moedas!");
+                TextControler.textInstant("Você perdeu a aposta de " + aposta + " moedas!\n");
 
                 int resultado = aposta * -1;
                 player.setMoedas(resultado);
@@ -103,7 +108,7 @@ public class NPCGambler extends NPC {
 
             int resultado = (int) (aposta * 1.5);
 
-            TextControler.textInstant("Você ganhou " + resultado + " moedas!");
+            TextControler.textInstant("Você ganhou " + resultado + " moedas!\n");
 
             player.setMoedas(resultado);
 

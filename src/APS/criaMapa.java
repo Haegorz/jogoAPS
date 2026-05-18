@@ -58,6 +58,6 @@ public class criaMapa {
 
         
         
-        return inicio; // ponto de partida do jogador
+        return escola; // ponto de partida do jogador
     }
 }

@@ -195,6 +195,8 @@ public class sistemaDeCombate {
 
             player.ganharXP(enemy.getXpDrop(), sc);
             player.ganharMoedas(enemy.getMoedasDrop());
+            player.setKillCount(player.getKillCount() + 1);
+            player.statUper();
 
         } else {
 

@@ -19,7 +19,7 @@ public class Ending {
     }
 
     public static void finalRuim() {
-        
+
         System.out.println("\n==================================");
         System.out.print("           ");
         TextControler.textDramatic("FINAL RUIM");
@@ -32,7 +32,7 @@ public class Ending {
 
         TextControler.textDramatic("Seu nome será esquecido...\n");
         System.out.println("==================================");
-    
+
     }
 
     public static void finalSecreto() {
@@ -49,6 +49,7 @@ public class Ending {
         TextControler.textDramatic("Poucos chegam até aqui.\n");
         System.out.println("==================================");
     }
+
     public static void finalRuimalmavendida() {
         System.out.println("\n==================================");
         System.out.print("           ");
@@ -62,6 +63,7 @@ public class Ending {
         TextControler.textFast("Seu nome será esquecido.\n");
         System.out.println("==================================");
     }
+
     public static void finalRuimlixo() {
         System.out.println("\n==================================");
         System.out.print("           ");
@@ -72,6 +74,21 @@ public class Ending {
         TextControler.textFast("Você não deveria ficar xingando as pessoas...\n");
         TextControler.textFast("(COMO VOCÊ PERDEU PRA ISSO?)\n");
         TextControler.textFast("Seu nome será esquecido.\n");
+        System.out.println("==================================");
+    }
+
+    public static void finalSecretoKarma() {
+        System.out.println("\n==================================");
+        System.out.print("           ");
+        TextControler.textDramatic("FINAL SECRETO??? (Mas a que custo?)");
+        System.out.print("             ");
+        System.out.println("==================================\n");
+
+        TextControler.textFast("Você derrubou o rei...\n");
+        TextControler.textFast("mas a que custo?\n");
+        TextControler.textFast("As sombras dominaram você...\n");
+
+        TextControler.textDramatic("Seu nome será esquecido...\n");
         System.out.println("==================================");
     }
 }
