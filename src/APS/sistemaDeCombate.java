@@ -13,18 +13,31 @@ public class sistemaDeCombate {
             Action playerAction = sistemaMenu.turnoJogador(player);
             Action enemyAction = enemyAI.decidir(enemy, player);
 
-            // DEFESAS
-            if (playerAction == Action.DEFEND) player.defender(5);
-            if (enemyAction == Action.DEFEND) enemy.defender(5);
-            if (enemyAction == Action.CAUTIOUS) enemy.defender(2);
+            // DEFESAS Heroi
+            if (playerAction == Action.DEFEND) player.defender(5,5);
+            if (playerAction == Action.DODGE) player.esquiva(3);
 
+
+            //Inimigo
+            if (enemyAction == Action.DEFEND) enemy.defender(5,3);
+            if (enemyAction == Action.CAUTIOUS) enemy.defender(2,2);
+            if (enemyAction == Action.DODGE) enemy.esquiva(8);
             // ATAQUES
+
             if (playerAction == Action.ATTACK) {
-                sistemaDeAcao.atacar(player, enemy);
+                if (player.gastarAp(6)) {
+                    sistemaDeAcao.atacar(player, enemy);
+                }else {
+                    System.out.println("Agilidade insuficiente para atacar!");
+                }
             }
 
             if (enemy.vivo() && enemyAction == Action.ATTACK) {
-                sistemaDeAcao.atacar(enemy, player);
+                 if (enemy.gastarAp(6)) {
+                    sistemaDeAcao.atacar(enemy, player);
+                }else {
+                    System.out.println("Agilidade insuficiente para atacar!");
+                }
             }
 
             // RESET DOS TURNOS

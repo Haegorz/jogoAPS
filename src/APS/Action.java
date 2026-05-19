@@ -3,5 +3,7 @@ package APS;
 public enum Action {
     ATTACK,
     DEFEND,
-    CAUTIOUS
+    CAUTIOUS,
+    DODGE,
+    USE_ITEM
 }
