@@ -80,6 +80,7 @@ public class Player extends Personagens {
 
 	private void subirNivel(Scanner sc) {
 		level++;
+		aumento(5);
 		exp -= proximoLevel;
 		proximoLevel = (int) (proximoLevel * 1.5);
 		if (proximoLevel <= 0)
@@ -395,46 +396,46 @@ public class Player extends Personagens {
 		int counter = killCount;
 		switch (counter) {
 			case 10:
-				aumento();
+				aumento(10);
 				break;
 			case 20:
-				aumento();
+				aumento(10);
 				break;
 			case 30:
-				aumento();
+				aumento(10);
 				break;
 			case 40:
-				aumento();
+				aumento(10);
 				this.aprenderSkill(new Skill("Recicle", 50, 70));
 				break;
 			case 50:
-				aumento();
+				aumento(10);
 				break;
 			case 60:
-				aumento();
+				aumento(10);
 				break;
 			case 70:
-				aumento();
+				aumento(10);
 				break;
 			case 80:
-				aumento();
+				aumento(10);
 				break;
 			case 90:
-				aumento();
+				aumento(10);
 				break;
 			case 100:
-				aumento();
+				aumento(10);
 				break;
 
 		}
 
 	}
 
-	public void aumento() {
-		aumentarMaxHp(10);
-		aumentarAtk(10);
-		aumentarDef(10);
-		aumentarMaxMp(10);
+	public void aumento(int valor) {
+		aumentarMaxHp(valor);
+		aumentarAtk(valor);
+		aumentarDef(valor);
+		aumentarMaxMp(valor);
 	}
 
 }

@@ -4,13 +4,17 @@ import java.util.Scanner;
 
 public class NPCHotel extends NPC {
     private static boolean isVivo = true;
-
+    
     public NPCHotel() {
         super("Lata de lixo falante");
+    }
+    public static boolean getIsVivo() {
+        return isVivo;
     }
 
     public ResultadoEvento conversar(Player player, Scanner sc) {
         if (isVivo) {
+            System.out.println("\n=== LATA DE LIXO FALANTE ===");
             System.out.println("1 - Oi?");
             System.out.println("2 - Você fede");
             System.out.println("3 - Sair");
@@ -18,15 +22,15 @@ public class NPCHotel extends NPC {
             switch (sc.nextInt()) {
                 case 1:
                     System.out.print("Lata de lixo: ");
-                    TextControler.textInstant("Ei, humano! Bem-vindo ao Hotel Lixo!\n");
+                    TextControler.textFast("Ei, humano! Bem-vindo ao Hotel Lixo!\n");
                     return ResultadoEvento.CONTINUAR;
                 case 2:
                     System.out.print("Lata de lixo: ");
-                    TextControler.textInstant("Você não tem vergonha?!\n");
-                    Mobs secretboos = new Mobs("Gi...", 1, 1, 1, 1, 1, 0);
-                    secretboos.setTipo("INTELIGENTE");
+                    TextControler.textFast("Você não tem vergonha?!\n");
+                    Mobs secretboss = new Mobs("Gi...", 1, 1, 1, 1, 1, 0);
+                    secretboss.setTipo("INTELIGENTE");
                     player.setKillCount(player.getKillCount() - 10);
-                    sistemaDeCombate.iniciarCombate(player, secretboos, sc);
+                    sistemaDeCombate.iniciarCombate(player, secretboss, sc);
 
                     if (!player.vivo()) {
                         Ending.finalRuimlixo();

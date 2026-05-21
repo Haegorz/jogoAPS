@@ -91,4 +91,20 @@ public class Ending {
         TextControler.textDramatic("Seu nome será esquecido...\n");
         System.out.println("==================================");
     }
+
+    public static void finalRuimMaligno() {
+        System.out.println("\n==================================");
+        System.out.print("           ");
+        TextControler.textDramatic("FINAL RUIM??? (O mal triunfa?)            \n");
+        System.out.print("             ");
+        System.out.println("==================================\n");
+
+        TextControler.textFast("Você se uniu ao mal...\n");
+        TextControler.textFast("Você aquele que era dito ser o bem.\n");
+        TextControler.textFast("O mundo é dominado pelo rei e pela sua mão direita\n");
+        TextControler.textDramatic("Não existe mais lugar para a humanidade...\n");
+        TextControler.textDramatic("Você se arrepende de suas escolhas?\n");
+        TextControler.textFast("Seu nome será esquecido.\n");
+        System.out.println("==================================");
+    }
 }

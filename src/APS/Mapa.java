@@ -14,10 +14,13 @@ public class Mapa {
 
     private NPC npcAtual = null;
     private NPC npc1 = new NPCEscola();
-    private NPC npc2 = new NPCMercador();
+    private NPC mercador = new NPCMercador();
     private NPC gamble = new NPCGambler();
     private NPC hotelNPC = new NPCHotel();
     private NPC secret = new SecretNPC();
+    private NPC mercador2 = new NPCMercadorEscola();
+    private NPC mercador3 = new NPCMercadorHotel();
+    private NPC donoHotel = new NPCDonoHotel();
 
     private boolean bossDerrotado = false;
     private boolean boss2Derrotado = false;
@@ -118,7 +121,13 @@ public class Mapa {
         switch (tipo) {
 
             case A1:
-                return EventoMapa.eventoA1(player, sc);
+                if (!bossDerrotado) {
+                    return EventoMapa.eventoA1(player, sc);
+                } else {
+                    TextControler.textFast("\nA área está calma, exceto por um monte de lixo no chão.");
+                    TextControler.textFast("\nPessoas parece estar voltando a frequentar a área...");
+                    return ResultadoEvento.SAIR_MAPA;
+                }
 
             case ESCOLA:
                 return eventoEscola(player, sc);
@@ -133,10 +142,10 @@ public class Mapa {
                 return eventoCasa(player, sc);
 
             case PARQUE:
-                if (!boss2Derrotado) {
+                if (!boss3Derrotado) {
                     TextControler.textInstant("Um inimigo poderoso surge na Area!");
 
-                    Mobs boss = new Mobs("Guardião de Ferro", 290, 25, 40, 280, 0, 270);
+                    Mobs boss = new Mobs("Guardião de Ferro", 290, 30, 40, 280, 0, 270);
                     boss.setTipo("TANK");
                     boss.bossEscale(player.getLevel());
 
@@ -146,7 +155,8 @@ public class Mapa {
                     if (!player.vivo()) {
                         return ResultadoEvento.MORREU;
                     }
-                    bossDerrotado = true;
+                    boss3Derrotado = true;
+                    TextControler.textDramatic("É uma luta fútil heroi...");
                     return ResultadoEvento.SAIR_MAPA;
                 } else {
                     TextControler.textFast("O parque está vazio, exceto por um banco quebrado.");
@@ -155,9 +165,9 @@ public class Mapa {
 
             case MERCADO:
                 if (!bossDerrotado) {
-                    TextControler.textInstant("Uma presença veloz te ataca!");
+                    TextControler.textInstant("\nUma presença veloz te ataca!");
 
-                    Mobs boss1 = new Mobs("Lâmina de Vidro", 200, 30, 15, 200, 1, 170);
+                    Mobs boss1 = new Mobs("Lâmina de Vidro", 200, 35, 20, 200, 1, 170);
                     boss1.setTipo("RAPIDO");
                     boss1.bossEscale(player.getLevel());
                     player.setKillCount(player.getKillCount() + 9);
@@ -177,10 +187,10 @@ public class Mapa {
                 }
 
             case BIBLIOTECA:
-                if (!boss3Derrotado) {
+                if (!boss2Derrotado) {
                     TextControler.textInstant("Uma presença veloz te ataca!");
 
-                    Mobs boss2 = new Mobs("Paladino da Sucata", 330, 30, 40, 400, 1, 350);
+                    Mobs boss2 = new Mobs("Paladino da Sucata", 330, 35, 40, 400, 1, 350);
                     boss2.setTipo("TANK");
                     boss2.bossEscale(player.getLevel());
 
@@ -190,7 +200,9 @@ public class Mapa {
                     if (!player.vivo()) {
                         return ResultadoEvento.MORREU;
                     }
-                    boss3Derrotado = true;
+                    boss2Derrotado = true;
+                    TextControler.textDramatic("O paladino cai de joelhos...");
+                    TextControler.textDramatic("Heroi... Hoje eu cairei, mas meu rei viverá para sempre!\n");
                     return ResultadoEvento.SAIR_MAPA;
                 } else {
                     TextControler.textFast(" A biblioteca está silenciosa, exceto por um livro empoeirado no chão.");
@@ -198,7 +210,13 @@ public class Mapa {
                 }
 
             case A2:
-                return EventoMapa.eventoA2(player, sc);
+                if (!boss3Derrotado) {
+                    return EventoMapa.eventoA2(player, sc);
+                } else {
+                    TextControler.textFast("Os sons de metal parecem ter cessado...");
+                    TextControler.textFast("\nO local parece mais seguro, mas ainda há um ar de mistério no ar.");
+                    return ResultadoEvento.SAIR_MAPA;
+                }
 
             case LOJA:
                 return eventoBar(player, sc);
@@ -213,10 +231,11 @@ public class Mapa {
                 TextControler.textFast("O Rei do Lixão aparece, pronto para o confronto final!");
 
                 // ===== FASE 1 =====
-                Mobs boss11 = new Mobs("Rei do Lixão", 350, 30, 45, 250, 1, 0);
+                Mobs boss11 = new Mobs("Rei do Lixão", 350, 70, 85, 350, 1, 0);
                 boss11.setTipo("INTELIGENTE");
                 boss11.bossEscale(player.getLevel());
                 player.setKillCount(player.getKillCount() + 9);
+
                 sistemaDeCombate.iniciarCombate(player, boss11, sc);
 
                 if (!player.vivo())
@@ -231,29 +250,31 @@ public class Mapa {
                 sc.nextLine();
 
                 if (escolha == 1) {
+                    if (player.getBadKarma() < 2) {
 
-                    TextControler.textDramatic("\nO rei sorri...");
-                    TextControler.textFast("\nVocê caiu em uma armadilha!");
+                        TextControler.textDramatic("\nO rei sorri...");
+                        TextControler.textFast("\nVocê caiu em uma armadilha!");
 
-                    // ===== FASE 2 (SURPRESA) =====
-                    Mobs bossFinal = new Mobs("Rei do Lixão Supremo", 400, 45, 30, 0, 1, 0);
-                    bossFinal.setTipo("AGRESSIVO");
-                    bossFinal.bossEscale(player.getLevel());
-                    sistemaDeCombate.iniciarCombate(player, bossFinal, sc);
+                        // ===== FASE 2 (SURPRESA) =====
+                        Mobs bossFinal = new Mobs("Rei do Lixão Supremo", 400, 85, 70, 0, 1, 0);
+                        bossFinal.setTipo("AGRESSIVO");
+                        bossFinal.bossEscale(player.getLevel());
+                        sistemaDeCombate.iniciarCombate(player, bossFinal, sc);
 
-                    if (!player.vivo()) {
-                        Ending.finalRuim();
-                        return ResultadoEvento.MORREU;
-                    } else {
-                        if (player.getBadKarma() >= 2) {
-                            Ending.finalSecretoKarma();
+                        if (!player.vivo()) {
+                            Ending.finalRuim();
                             return ResultadoEvento.MORREU;
                         } else {
                             Ending.finalSecreto();
                             return ResultadoEvento.MORREU;
                         }
+                    } else {
+                        Ending.finalRuimMaligno();
+                        return ResultadoEvento.MORREU;
                     }
-
+                } else if (player.getBadKarma() >= 2) {
+                    Ending.finalSecretoKarma();
+                    return ResultadoEvento.MORREU;
                 } else {
                     Ending.finalBom();
                     return ResultadoEvento.MORREU;
@@ -307,7 +328,7 @@ public class Mapa {
                 return ResultadoEvento.CONTINUAR;
 
             case 3:
-                npcAtual = npc2;
+                npcAtual = mercador2;
                 return ResultadoEvento.CONTINUAR;
 
             case 4:
@@ -378,9 +399,10 @@ public class Mapa {
 
         System.out.println("\n=== HOTEL ===");
         System.out.println("1 - Descansar");
-        System.out.println("2 - Falar com Mercador");
+        System.out.println("2 - Falar com Dono do Hotel");
         System.out.println("3 - Falar com Lata de Lixo Falante");
-        System.out.println("4 - Sair");
+        System.out.println("4 - Falar com Mercador do Hotel");
+        System.out.println("5 - Sair");
 
         int op;
         try {
@@ -403,12 +425,15 @@ public class Mapa {
                 return ResultadoEvento.CONTINUAR;
 
             case 2:
-                npcAtual = npc2;
+                npcAtual = donoHotel;
                 return ResultadoEvento.CONTINUAR;
             case 3:
                 npcAtual = hotelNPC;
                 return ResultadoEvento.CONTINUAR;
             case 4:
+                npcAtual = mercador3;
+                return ResultadoEvento.CONTINUAR;
+            case 5:
                 return ResultadoEvento.SAIR_MAPA;
         }
 
@@ -432,7 +457,7 @@ public class Mapa {
         System.out.println("1 - Falar com Mercador");
 
         if (player.getBadKarma() >= 2) {
-            System.out.println( "2 - Pessoa de Casaco verde com listra amarela");
+            System.out.println("2 - Pessoa de Casaco verde com listra amarela");
             System.out.println("3 - Sair");
 
         } else {
@@ -449,11 +474,10 @@ public class Mapa {
             return ResultadoEvento.CONTINUAR;
         }
 
-
         if (player.getBadKarma() < 2) {
             switch (op) {
                 case 1:
-                    npcAtual = npc2;
+                    npcAtual = mercador;
                     return ResultadoEvento.CONTINUAR;
 
                 case 2:
@@ -468,7 +492,7 @@ public class Mapa {
         switch (op) {
 
             case 1:
-                npcAtual = npc2;
+                npcAtual = mercador;
                 return ResultadoEvento.CONTINUAR;
 
             case 2:

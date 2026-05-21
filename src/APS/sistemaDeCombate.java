@@ -17,11 +17,26 @@ public class sistemaDeCombate {
             // MAGIAS
             if (playerAction == Action.MAGIA) {
 
-                player.mostrarSkills();
+                boolean voltarMenu = false;
 
-                while (true) {
+                while (!voltarMenu) {
+                    player.mostrarSkills();
                     System.out.println("Digite a magia:");
+                    System.out.println("Ou digite 'sair' para voltar");
+
                     String skillEscolhida = sc.nextLine();
+
+                    if (skillEscolhida.equalsIgnoreCase("sair")) {
+
+                        voltarMenu = true;
+                        sistemaMenu.status(player, enemy);
+                        playerAction = sistemaMenu.turnoJogador(player, sc);
+
+                        if (playerAction != Action.MAGIA) {
+                            break;
+                        }
+                        continue;
+                    }
 
                     boolean usou = player.usarMagia(skillEscolhida, enemy);
 
@@ -45,18 +60,15 @@ public class sistemaDeCombate {
 
                     String itemToUse = sc.nextLine();
 
-
                     if (itemToUse.equalsIgnoreCase("sair")) {
 
                         voltarMenu = true;
                         sistemaMenu.status(player, enemy);
                         playerAction = sistemaMenu.turnoJogador(player, sc);
 
-                        // se escolheu outra ação, sai do loop
                         if (playerAction != Action.INV) {
                             break;
                         }
-
                         continue;
                     }
 
@@ -71,33 +83,25 @@ public class sistemaDeCombate {
             // IA INIMIGA
             Action enemyAction = enemyAI.decidir(enemy, player);
 
-        
             if (enemy.getHp() < enemy.getMaxHp() * 0.3) {
                 System.out.println(enemy.getNome() + " parece fraco...");
             }
 
             // DEFESA PLAYER
             if (playerAction == Action.DEFEND) {
-
                 int defesa = 3 + (int) (Math.random() * 5);
-
                 player.defender(defesa);
-
                 System.out.println(player.getNome() + " se preparou! DEF +" + defesa);
             }
 
             // DEFESA INIMIGO
             if (enemyAction == Action.DEFEND) {
-
                 enemy.defender(5);
-
                 System.out.println(enemy.getNome() + " levantou a guarda!");
             }
 
             if (enemyAction == Action.CAUTIOUS) {
-
                 enemy.defender(2);
-
                 System.out.println(enemy.getNome() + " está cauteloso.");
             }
 
@@ -106,18 +110,14 @@ public class sistemaDeCombate {
                     enemy.getTipo().equals("AGRESSIVO")) {
 
                 if (Math.random() < 0.4) {
-
                     System.out.println("O boss ataca duas vezes!");
-
                     sistemaDeAcao.atacar(enemy, player);
                 }
             }
 
             // QUEBRA DEFESA
             if (playerAction == Action.DEFEND && Math.random() < 0.3) {
-
                 System.out.println(enemy.getNome() + " quebra sua defesa!");
-
                 player.receberDano(5);
             }
 
@@ -125,13 +125,10 @@ public class sistemaDeCombate {
             if (playerAction == Action.ATTACK) {
 
                 if (Math.random() < 0.25) {
-
                     System.out.println("Ataque especial!");
-
                     player.atacarEspecial(enemy);
 
                 } else {
-
                     sistemaDeAcao.atacar(player, enemy);
                 }
             }
@@ -139,9 +136,7 @@ public class sistemaDeCombate {
             // TURNO INIMIGO
 
             if (enemy.isStun()) {
-
                 System.out.println(enemy.getNome() + " está atordoado e perdeu o turno!");
-
                 enemy.setStun(false);
 
             } else if (enemy.vivo() &&
@@ -149,9 +144,7 @@ public class sistemaDeCombate {
 
                 // counter defesa
                 if (playerAction == Action.DEFEND) {
-
                     System.out.println("Defesa perfeita! Dano reduzido!");
-
                     player.defender(
                             player.getDefTotal() + 5);
                 }
@@ -160,16 +153,11 @@ public class sistemaDeCombate {
                 if (enemy.getTipo() != null) {
 
                     if (enemy.getTipo().equals("AGRESSIVO") && Math.random() < 0.3) {
-
                         System.out.println("O boss entrou em fúria!");
-
                         sistemaDeAcao.atacar(enemy, player);
                     }
-
                     if (enemy.getTipo().equals("INTELIGENTE") && Math.random() < 0.2) {
-
                         System.out.println("O boss previu seu ataque!");
-
                         enemy.defender(10);
                     }
                 }
@@ -184,13 +172,11 @@ public class sistemaDeCombate {
 
         // RESULTADO FINAL
         sistemaMenu.status(player, enemy);
-
         System.out.println("\n===== RESULTADO =====");
 
         if (player.vivo()) {
 
             System.out.println("Você venceu!");
-
             System.out.println("EXP ganho: " + enemy.getXpDrop() + "\nDinheiro ganho: " + enemy.getMoedasDrop());
 
             player.ganharXP(enemy.getXpDrop(), sc);
@@ -199,7 +185,6 @@ public class sistemaDeCombate {
             player.statUper();
 
         } else {
-
             System.out.println("Você perdeu...");
         }
     }

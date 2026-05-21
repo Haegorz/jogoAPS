@@ -21,7 +21,7 @@ public class MenuPrincipal {
 
             switch (oji) {
                 case 1:
-                    Player player = new Player("Cavaleiro", 600, 900, 140, 15);
+                    Player player = new Player("Cavaleiro", 60, 9, 14, 15);
                     player.aprenderSkill(new Skill("Grito de Guerra", 15, 5));
                     return player;
 

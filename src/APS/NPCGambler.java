@@ -16,6 +16,7 @@ public class NPCGambler extends NPC {
             TextControler.textInstant("O cara suspeito não tem mais nada pra te oferecer...");
             return ResultadoEvento.SAIR_MAPA;
         } else {
+            System.out.println("\n=== CARA SUSPEITO ===");
             System.out.println("1 - Oi");
             System.out.println("2 - Jogar");
             System.out.println("3 - Sair");

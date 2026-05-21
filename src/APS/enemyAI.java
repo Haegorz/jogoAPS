@@ -22,7 +22,7 @@ public class enemyAI {
 
                 case "TANK":
                     if (enemy.getHp() < enemy.getMaxHp() * 0.25) {
-                        if(Math.random() < 0.5) {
+                        if(Math.random() < 0.25) {
                             System.out.println(enemy.getNome() + " levanta sua guarda!");
                             return Action.DEFEND;
                         } else {
