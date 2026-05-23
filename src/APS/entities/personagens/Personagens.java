@@ -2,6 +2,7 @@ package APS.entities.personagens;
 
 public class Personagens {
 
+    // (Encapsulamento) - Uso do modificador 'protected' para restringir o acesso direto aos dados apenas a esta classe e às suas subclasses
     protected String nome;
     protected int hp;
     protected int maxHp;
@@ -11,8 +12,7 @@ public class Personagens {
     protected int defTemp = 0;
     protected int maxMp;
     
-    
-
+    // (Método Construtor) - Inicializa o estado base de qualquer personagem do jogo
     public Personagens(String nome, int hp, int atk, int def, int mp) {
         this.nome = nome;
         this.hp = this.maxHp = hp;
@@ -22,7 +22,6 @@ public class Personagens {
         this.def = def;
         
     }
-
 
     public String getNome() { return nome; }
     public int getHp() { return hp; }

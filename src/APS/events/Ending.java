@@ -4,6 +4,7 @@ import APS.ui.TextControler;
 
 public class Ending {
 
+    // (Atributo Estático) - Métodos estáticos que encerram a execução exibindo as strings do desfecho 
     public static void finalBom() {
         System.out.println("\n==================================");
         System.out.print("           ");
@@ -20,6 +21,7 @@ public class Ending {
         System.out.println("==================================");
     }
 
+    
     public static void finalRuim() {
 
         System.out.println("\n==================================");
@@ -37,6 +39,7 @@ public class Ending {
 
     }
 
+
     public static void finalSecreto() {
         System.out.println("\n==================================");
         System.out.print("           ");
@@ -52,6 +55,7 @@ public class Ending {
         System.out.println("==================================");
     }
 
+    // (Atributo Estático) - Comportamento estático compartilhado de forma fixa no sistema
     public static void finalRuimalmavendida() {
         System.out.println("\n==================================");
         System.out.print("           ");
@@ -66,6 +70,7 @@ public class Ending {
         System.out.println("==================================");
     }
 
+    // (Atributo Estático) - Função de classe fixa e imutável de acesso direto no encerramento
     public static void finalRuimlixo() {
         System.out.println("\n==================================");
         System.out.print("           ");
@@ -79,6 +84,7 @@ public class Ending {
         System.out.println("==================================");
     }
 
+    // (Atributo Estático) - Operação global estática que centraliza uma das resoluções narrativas do jogo
     public static void finalSecretoKarma() {
         System.out.println("\n==================================");
         System.out.print("           ");
@@ -94,6 +100,7 @@ public class Ending {
         System.out.println("==================================");
     }
 
+    // (Atributo Estático) - Método estático que encerra a execução exibindo as strings do desfecho maligno
     public static void finalRuimMaligno() {
         System.out.println("\n==================================");
         System.out.print("           ");
@@ -102,7 +109,7 @@ public class Ending {
         System.out.println("==================================\n");
 
         TextControler.textFast("Você se uniu ao mal...\n");
-        TextControler.textFast("Você aquele que era dito ser o bem.\n");
+        TextControler.textFast("Você aquele que era dito ser o bien.\n");
         TextControler.textFast("O mundo é dominado pelo rei e pela sua mão direita\n");
         TextControler.textDramatic("Não existe mais lugar para a humanidade...\n");
         TextControler.textDramatic("Você se arrepende de suas escolhas?\n");

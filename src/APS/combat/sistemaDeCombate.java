@@ -8,10 +8,12 @@ import java.util.Scanner;
 
 public class SistemaDeCombate {
 
+    // (Polimorfismo de Classe) - O método aceita qualquer variação ou subclasse de Player e Mobs de maneira genérica
     public static void iniciarCombate(Player player, Mobs enemy, Scanner sc) {
 
         System.out.println("\nCombate iniciado!");
 
+        // (Encapsulamento) - Verificação de estado interno dos objetos via métodos públicos
         while (player.vivo() && enemy.vivo()) {
 
             SistemaMenu.status(player, enemy);
@@ -42,6 +44,7 @@ public class SistemaDeCombate {
                         continue;
                     }
 
+                    // (Encapsulamento) - O objeto processa uma lógica interna(gastar mana, aplicar efeito) expondo apenas o sucesso ou falha da ação
                     boolean usou = player.usarMagia(skillEscolhida, enemy);
 
                     if (usou) {
@@ -57,6 +60,7 @@ public class SistemaDeCombate {
 
                 while (!voltarMenu) {
 
+                    // (Encapsulamento) - Método acessor de listagem que esconde como a coleção interna do inventário está estruturada
                     player.getInventario();
 
                     System.out.println("Digite o Item a ser usado");
@@ -87,6 +91,7 @@ public class SistemaDeCombate {
             // IA INIMIGA
             Action enemyAction = enemyAI.decidir(enemy, player);
 
+            // (Encapsulamento) - Uso de gets públicos para ler os dados do inimigo sem acessar diretamente os atributos privados
             if (enemy.getHp() < enemy.getMaxHp() * 0.3) {
                 System.out.println(enemy.getNome() + " parece fraco...");
             }
@@ -94,6 +99,7 @@ public class SistemaDeCombate {
             // DEFESA PLAYER
             if (playerAction == Action.DEFEND) {
                 int defesa = 3 + (int) (Math.random() * 5);
+                // (Encapsulamento) - Altera o estado de defesa do jogador passando um parâmetro calculado externamente
                 player.defender(defesa);
                 System.out.println(player.getNome() + " se preparou! DEF +" + defesa);
             }
@@ -141,6 +147,7 @@ public class SistemaDeCombate {
 
             if (enemy.isStun()) {
                 System.out.println(enemy.getNome() + " está atordoado e perdeu o turno!");
+                // (Encapsulamento) - Modificação direta de uma propriedade de controle via método set público
                 enemy.setStun(false);
 
             } else if (enemy.vivo() &&

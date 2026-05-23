@@ -8,18 +8,24 @@ import APS.items.TipoItem;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// (Herança) - NPCMercadorHotel herda atributos e métodos da classe base NPC
 public class NPCMercadorHotel extends NPC {
+    
+    // (Encapsulamento) - Atributo privado restringindo o acesso direto de outras classes externas
     private int flag;
 
+    // (Método Construtor) - Inicializa o estado do objeto e chama o construtor da superclasse via 'super'
     public NPCMercadorHotel() {
         super("Mercador");
         flag = 0;
     }
 
+    // (Sobrescrita) - Redefine o comportamento do método 'conversar' herdado da classe mãe NPC
     @Override
     public ResultadoEvento conversar(Player player, Scanner sc) {
 
         System.out.println("\n======= MERCADOR =======");
+        // (Encapsulamento) - Uso de método get público para acessar as moedas do objeto Player de forma segura
         System.out.println("Moedas: " + player.getMoedas());
 
         System.out.println("1 - Poção HP (+20 HP) ........ 20 moedas");
@@ -30,6 +36,7 @@ public class NPCMercadorHotel extends NPC {
 
         int op;
 
+        // (Tratamento de Exceções) - Captura erros em tempo de execução caso o tipo inserido no Scanner seja inválido
         try {
 
             op = sc.nextInt();
@@ -56,6 +63,7 @@ public class NPCMercadorHotel extends NPC {
 
                 player.ganharMoedas(-20);
 
+                // (Instanciação de Objeto) - Criação de uma nova instância da classe BattleItem
                 player.adicionarItem("pocao_hp", new BattleItem("Poção HP", TipoItem.HP, 20), 1);
                 System.out.println("Você comprou uma Poção HP!");
 
@@ -83,8 +91,9 @@ public class NPCMercadorHotel extends NPC {
                 }
 
                 player.ganharMoedas(-200);
+                // (Instanciação de Objeto) - Aloca espaço em memória para um novo objeto do tipo EquipItem
                 player.adicionarItem("espada de mithril",new EquipItem("Espada de Mithril",TipoItem.ATK,15),1);
-                System.out.println("Você comprou uma Espada de Mithril!");
+                System.out.println("Você comprou uma Emspada de Mithril!");
 
                 return ResultadoEvento.CONTINUAR;
 

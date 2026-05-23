@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class inputTradutor {
 
+    // (Polimorfismo de Classe) - O método aceita receber qualquer subclasse válida do fluxo de entrada de dados Scanner
     public String inputHandler(Scanner sc) {
 
         String line = sc.nextLine().toLowerCase();

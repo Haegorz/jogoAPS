@@ -2,19 +2,21 @@ package APS.map;
 
 public class criaMapa {
 
+    // (Atributo Estático) - Método de classe que cria os nós de navegação sem precisar de uma instância da fábrica
     public static Mapa criarMundo() {
 
-    	Mapa inicio = new Mapa(TipoMapa.CASA_MUNCKS, "Sua Casa");
-    	Mapa area1 = new Mapa(TipoMapa.A1, "Area 1 ");
-    	Mapa parque = new Mapa(TipoMapa.PARQUE, "PARQUE");
-    	Mapa mercado = new Mapa(TipoMapa.MERCADO, "mercado");
-    	Mapa escola = new Mapa(TipoMapa.ESCOLA, "Escola");
-    	Mapa biblioteca = new Mapa(TipoMapa.BIBLIOTECA, "Biblioteca");
-    	Mapa area2 = new Mapa(TipoMapa.A2, "Area 2");
-    	Mapa bar = new Mapa(TipoMapa.LOJA, "Mercador");
+        // (Instanciação de Objeto) - Aloca espaço em memória para a criação de instâncias individuais da classe Mapa
+        Mapa inicio = new Mapa(TipoMapa.CASA_MUNCKS, "Sua Casa");
+        Mapa area1 = new Mapa(TipoMapa.A1, "Area 1 ");
+        Mapa parque = new Mapa(TipoMapa.PARQUE, "PARQUE");
+        Mapa mercado = new Mapa(TipoMapa.MERCADO, "mercado");
+        Mapa escola = new Mapa(TipoMapa.ESCOLA, "Escola");
+        Mapa biblioteca = new Mapa(TipoMapa.BIBLIOTECA, "Biblioteca");
+        Mapa area2 = new Mapa(TipoMapa.A2, "Area 2");
+        Mapa bar = new Mapa(TipoMapa.LOJA, "Mercador");
         Mapa hotel = new Mapa(TipoMapa.HOTEL, "Hotel");
-    	Mapa area3 = new Mapa(TipoMapa.A3, "Area 3");
-    	Mapa usina = new Mapa(TipoMapa.USINA, "Usina Nuclear");
+        Mapa area3 = new Mapa(TipoMapa.A3, "Area 3");
+        Mapa usina = new Mapa(TipoMapa.USINA, "Usina Nuclear");
         Mapa quadra = new Mapa(TipoMapa.QUADRA, "Quadra de Esportes");
 
         inicio.setOeste(area1);
@@ -53,10 +55,6 @@ public class criaMapa {
 
         usina.setLeste(parque);
 
-
-
-
-        
         
         return inicio; // ponto de partida do jogador
     }

@@ -8,16 +8,20 @@ import APS.items.TipoItem;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// (Herança) - NPCMercadorEscola estende a superclasse NPC, herdando sua estrutura base
 public class NPCMercadorEscola extends NPC {
 
+    // (Método Construtor) - Inicializa o objeto chamando o construtor pai para definir o nome "Mercador"
     public NPCMercadorEscola() {
         super("Mercador");
     }
 
+    // (Sobrescrita) - Altera o comportamento do método 'conversar' definido na classe mãe NPC usando a anotação @Override
     @Override
     public ResultadoEvento conversar(Player player, Scanner sc) {
 
         System.out.println("\n======= MERCADOR =======");
+        // (Encapsulamento) - Obtém o valor do atributo privado de moedas do Player usando o método get público
         System.out.println("Moedas: " + player.getMoedas());
 
         System.out.println("1 - Poção HP (+20 HP) ........ 20 moedas");
@@ -28,6 +32,7 @@ public class NPCMercadorEscola extends NPC {
 
         int op;
 
+        // (Tratamento de Exceções) - Bloco try-catch para lidar com possíveis erros de tipo de dado na entrada do Scanner
         try {
 
             op = sc.nextInt();
@@ -54,6 +59,7 @@ public class NPCMercadorEscola extends NPC {
 
                 player.ganharMoedas(-20);
 
+                // (Instanciação de Objeto) - Cria uma nova instância de BattleItem diretamente na passagem de parâmetros
                 player.adicionarItem("pocao_hp", new BattleItem("Poção HP", TipoItem.HP, 20), 1);
                 System.out.println("Você comprou uma Poção HP!");
 
@@ -81,6 +87,7 @@ public class NPCMercadorEscola extends NPC {
                 }
 
                 player.ganharMoedas(-130);
+                // (Instanciação de Objeto) - Cria  um objeto do tipo EquipItem
                 player.adicionarItem("espada de ferro encantada",new EquipItem("Espada de Ferro Encantada",TipoItem.ATK,10),1);
                 System.out.println("Você comprou uma Espada de Ferro Encantada!");
                 return ResultadoEvento.CONTINUAR;

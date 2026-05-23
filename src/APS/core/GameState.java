@@ -1,5 +1,5 @@
 package APS.core;
-
+// (Encapsulamento) - Uso de estrutura enum para limitar, agrupar e proteger os estados válidos do fluxo do jogo
 public enum GameState {
 	
 	//estados do loop 

@@ -11,13 +11,18 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+// (Herança) - NPCGambler herda atributos e métodos da superclasse NPC
 public class NPCGambler extends NPC {
+    
+    // (Encapsulamento) - Atributo privado restringindo o acesso direto de outras classes
     private boolean isVivo = true;
 
+    // (Método Construtor) - Inicializa o objeto definindo o nome via chamada ao construtor pai
     public NPCGambler() {
         super("Cara Suspeito");
     }
 
+    // (Sobrescrita) - Redefine o método 'conversar' herdado da classe mãe NPC
     public ResultadoEvento conversar(Player player, Scanner sc) {
         if (!isVivo) {
             TextControler.textInstant("O cara suspeito não tem mais nada pra te oferecer...");
@@ -30,6 +35,7 @@ public class NPCGambler extends NPC {
 
             int op;
 
+            // (Tratamento de Exceções) - Captura erros de tipo de dado inválido inserido no Scanner
             try {
                 op = sc.nextInt();
                 sc.nextLine();
@@ -53,6 +59,7 @@ public class NPCGambler extends NPC {
                     TextControler.textInstant("Se você ganhar, recebe 1.5x o valor apostado, mas se perder, perde tudo!\n");
                     System.out.println("Quanto vc quer apostar? (Digite um número inteiro)");
 
+                    // (Tratamento de Exceções) - Segundo bloco try-catch para lidar com erros na entrada do valor da aposta
                     try {
                         int aposta = sc.nextInt();
                         sc.nextLine();
@@ -81,13 +88,17 @@ public class NPCGambler extends NPC {
 
         if (dado < 4) {
 
+            // (Encapsulamento) - Acesso ao estado financeiro do player através de getter público
             if (player.getMoedas() - aposta < 0) {
                 TextControler.textInstant("Vai pagar com sua vida então...");
 
+                // (Polimorfismo de Classe) - Instanciação de 'Mobs', que compartilha a árvore hierárquica de Personagens
                 Mobs secretboos = new Mobs("Igor", 300, player.getHp() * 2, player.getAtk() - 15, 100, 1, 0);
                 secretboos.setTipo("INTELIGENTE");
 
                 player.setKillCount(player.getKillCount() + 9);
+                
+                // (Polimorfismo de Classe) - O método aceita subclasses válidas de Player e Mobs de forma genérica
                 SistemaDeCombate.iniciarCombate(player, secretboos, sc);
 
                 if (!player.vivo()) {
@@ -98,6 +109,8 @@ public class NPCGambler extends NPC {
                     isVivo = false;
                     player.setBadKarma(1);
                     TextControler.textFast("Você sente uma estranha sensação de poder ao derrotar o cara suspeito...\n");
+                    
+                    // (Instanciação de Objeto) - Criação  de uma nova Skill para passar como parâmetro do método
                     player.aprenderSkill(new Skill("Apostar", (int)(new Random().nextInt(100)), (int)(new Random().nextInt(100))));
                     return ResultadoEvento.SAIR_MAPA;
                 }
@@ -107,6 +120,7 @@ public class NPCGambler extends NPC {
                 TextControler.textInstant("Você perdeu a aposta de " + aposta + " moedas!\n");
 
                 int resultado = aposta * -1;
+                // (Encapsulamento) - Modificação controlada do estado do player através do método setter
                 player.setMoedas(resultado);
 
                 return ResultadoEvento.CONTINUAR;

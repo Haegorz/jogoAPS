@@ -1,17 +1,19 @@
 package APS.entities.personagens;
 
-import java.util.Random;
-
 import APS.combat.Action;
+import java.util.Random;
 
 public class enemyAI {
 
+    // (Atributo Estático) - Atributo de classe compartilhado, que não depende de instâncias
     private static Random rand = new Random();
 
+    // (Polimorfismo de Classe) - O método aceita subclasses válidas de Mobs e Player genericamente
     public static Action decidir(Mobs enemy, Player player) {
 
         System.out.println("\nTurno do inimigo...");
 
+        // (Encapsulamento) - Leitura do estado do inimigo através de métodos assessores (getters) públicos
         String tipo = enemy.getTipo();
 
         if (tipo != null) {

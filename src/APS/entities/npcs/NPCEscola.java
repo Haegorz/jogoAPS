@@ -5,13 +5,15 @@ import APS.events.ResultadoEvento;
 import APS.ui.TextControler;
 import java.util.Scanner;
 
+// (Herança) - NPCEscola herda características e comportamentos da classe mãe NPC
 public class NPCEscola extends NPC {
 
+    // (Método Construtor) - Inicializa o objeto definindo o nome "Ito" através da superclasse
     public NPCEscola() {
         super("Ito");
     }
 
-    
+    // (Sobrescrita) - Altera o comportamento do método 'conversar' definido originalmente em NPC
     public ResultadoEvento conversar(Player player, Scanner sc) {
 
         System.out.println("\n=== PROF. ITO ===");
@@ -22,6 +24,7 @@ public class NPCEscola extends NPC {
 
         int op;
 
+        // (Tratamento de Exceções) - Captura erros de digitação caso o usuário não informe um número inteiro
         try {
             op = sc.nextInt();
             sc.nextLine();

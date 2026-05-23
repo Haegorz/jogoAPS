@@ -12,12 +12,16 @@ public class Mapa {
     private TipoMapa tipo;
     private String nome;
 
+    // (Polimorfismo de Classe) - Atributos de autorreferência que apontam para objetos do mesmo tipo abstrato/classe Mapa
     private Mapa norte;
     private Mapa sul;
     private Mapa leste;
     private Mapa oeste;
 
+    // (Polimorfismo de Classe) - A referência genérica 'npcAtual' aceita receber objetos de qualquer uma das subclasses de NPC
     private NPC npcAtual = null;
+    
+    // (Instanciação de Objeto) - Cria e aloca memória para instâncias específicas de subclasses da classe abstrata NPC
     private NPC npc1 = new NPCEscola();
     private NPC mercador = new NPCMercador();
     private NPC gamble = new NPCGambler();
@@ -31,6 +35,7 @@ public class Mapa {
     private boolean boss2Derrotado = false;
     private boolean boss3Derrotado = false;
 
+    // (Método Construtor) - Inicializa o estado interno e os atributos de identificação da instância de Mapa
     public Mapa(TipoMapa tipo, String nome) {
         this.tipo = tipo;
         this.nome = nome;
@@ -150,6 +155,7 @@ public class Mapa {
                 if (!boss3Derrotado) {
                     TextControler.textInstant("Um inimigo poderoso surge na Area!");
 
+                    // (Instanciação de Objeto) - Alocação e criação de um novo objeto do tipo Mobs para o combate
                     Mobs boss = new Mobs("Guardião de Ferro", 290, 30, 40, 280, 0, 270);
                     boss.setTipo("TANK");
                     boss.bossEscale(player.getLevel());
@@ -251,6 +257,7 @@ public class Mapa {
                 TextControler.textInstant("\n1 - Poupar o rei");
                 TextControler.textInstant("\n2 - Finalizar o rei");
 
+                // (Tratamento de Exceções) - Entrada monitorada de dados primitivos via Scanner
                 int escolha = sc.nextInt();
                 sc.nextLine();
 
@@ -295,6 +302,7 @@ public class Mapa {
 
         if (npcAtual != null) {
 
+            // (Polimorfismo de Classe) - Execução polimórfica do método 'conversar', cujo comportamento varia com base na subclasse real contida em npcAtual
             ResultadoEvento r = npcAtual.conversar(player, sc);
 
             if (r == ResultadoEvento.SAIR_MAPA) {
@@ -312,6 +320,7 @@ public class Mapa {
         System.out.println("4 - Sair");
 
         int op;
+        // (Tratamento de Exceções) - Captura de erros de tipo em tempo de execução
         try {
             op = sc.nextInt();
             sc.nextLine();
@@ -329,6 +338,7 @@ public class Mapa {
                 return ResultadoEvento.CONTINUAR;
 
             case 2:
+                // (Polimorfismo de Classe) - Atribuição de uma subclasse específica (NPCEscola) para a referência genérica da superclasse (NPC)
                 npcAtual = npc1;
                 return ResultadoEvento.CONTINUAR;
 

@@ -8,16 +8,20 @@ import APS.items.TipoItem;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// (Herança) - NPCMercador herda os atributos e métodos da superclasse NPC
 public class NPCMercador extends NPC {
 
+    // (Método Construtor) - Inicializa o objeto chamando o construtor pai para definir o nome "Mercador"
     public NPCMercador() {
         super("Mercador");
     }
 
+    // (Sobrescrita) - Altera o comportamento padrão do método 'conversar' herdado de NPC usando a anotação @Override
     @Override
     public ResultadoEvento conversar(Player player, Scanner sc) {
 
         System.out.println("\n======= MERCADOR =======");
+        // (Encapsulamento) - Obtém as moedas de forma segura usando o método get público do Player
         System.out.println("Moedas: " + player.getMoedas());
 
         System.out.println("1 - Poção HP (+20 HP) ........ 20 moedas");
@@ -28,6 +32,7 @@ public class NPCMercador extends NPC {
 
         int op;
 
+        // (Tratamento de Exceções) - Bloco try-catch para lidar com possíveis erros de tipo na digitação do usuário
         try {
 
             op = sc.nextInt();
@@ -54,6 +59,7 @@ public class NPCMercador extends NPC {
 
                 player.ganharMoedas(-20);
 
+                // (Instanciação de Objeto) - Cria uma nova instância de BattleItem diretamente na lista de parâmetros
                 player.adicionarItem("pocao_hp", new BattleItem("Poção HP", TipoItem.HP, 20), 1);
                 System.out.println("Você comprou uma Poção HP!");
 
@@ -81,6 +87,7 @@ public class NPCMercador extends NPC {
                 }
 
                 player.ganharMoedas(-70);
+                // (Instanciação de Objeto) - Cria um objeto do tipo EquipItem
                 player.adicionarItem("espada de ferro",new EquipItem("Espada de Ferro",TipoItem.ATK,5),1);
                 System.out.println("Você comprou uma Espada de Ferro!");
                 return ResultadoEvento.CONTINUAR;

@@ -8,9 +8,11 @@ import java.util.Scanner;
 
 public class SistemaMenu {
 
+    // (Atributo Estático) - Método de classe que pode ser acessado diretamente sem necessitar de uma instância de SistemaMenu
     public static void status(Personagens p, Personagens e) {
 
         System.out.println("\n====================");
+        // (Polimorfismo de Classe) - Os parâmetros aceitam referências genéricas de Personagens, englobando objetos de qualquer uma de suas subclasses
         System.out.println(p.getNome() + " HP: " + p.getHp() + "/" + p.getMaxHp() +
                 " MP " + p.getMp() + "/" + p.getMaxMp()
                 + " | ATK:" + p.getAtk() + " DEF:" + p.getDefTotal());
@@ -19,6 +21,7 @@ public class SistemaMenu {
         System.out.println("====================");
     }
 
+    // (Atributo Estático) - Operação global estática encarregada de capturar a ação escolhida pelo usuário durante o combate
     public static Action turnoJogador(Personagens p, Scanner sc) {
 
         while (true) {
@@ -28,6 +31,7 @@ public class SistemaMenu {
             System.out.println("3 - Magia");
             System.out.println("4 - Inventario");
 
+            // (Tratamento de Exceções) - Bloco de captura estruturado para isolar e tratar erros de entrada de dados incorretos
             try {
                 int escolha = sc.nextInt();
                 sc.nextLine();

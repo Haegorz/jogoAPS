@@ -5,13 +5,15 @@ import APS.events.ResultadoEvento;
 import APS.ui.TextControler;
 import java.util.Scanner;
 
+// (Herança) - NPCDonoHotel estende a classe base NPC, herdando seus atributos e comportamentos
 public class NPCDonoHotel extends NPC {
 
+    // (Método Construtor) - Inicializa o objeto chamando o construtor da superclasse via 'super'
     public NPCDonoHotel() {
         super("Dono");
     }
 
-    
+    // (Sobrescrita) - Redefine o comportamento do método 'conversar'Herdado da classe NPC
     public ResultadoEvento conversar(Player player, Scanner sc) {
         if (NPCHotel.getIsVivo()) {
            
@@ -23,6 +25,7 @@ public class NPCDonoHotel extends NPC {
 
         int op;
 
+        // (Tratamento de Exceções) - Bloco try-catch para capturar erros de entrada do Scanner
         try {
             op = sc.nextInt();
             sc.nextLine();
