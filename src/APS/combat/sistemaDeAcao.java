@@ -2,7 +2,7 @@ package APS.combat;
 
 import APS.entities.personagens.*;
 
-public class sistemaDeAcao {
+public class SistemaDeAcao {
 
     public static void atacar(Personagens atk, Personagens def) {
     	

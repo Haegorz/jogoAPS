@@ -1,7 +1,7 @@
 package APS.entities.npcs;
 
+import APS.combat.SistemaDeCombate;
 import APS.combat.Skill;
-import APS.combat.sistemaDeCombate;
 import APS.entities.personagens.Mobs;
 import APS.entities.personagens.Player;
 import APS.events.Ending;
@@ -88,7 +88,7 @@ public class NPCGambler extends NPC {
                 secretboos.setTipo("INTELIGENTE");
 
                 player.setKillCount(player.getKillCount() + 9);
-                sistemaDeCombate.iniciarCombate(player, secretboos, sc);
+                SistemaDeCombate.iniciarCombate(player, secretboos, sc);
 
                 if (!player.vivo()) {
                     Ending.finalRuimalmavendida();

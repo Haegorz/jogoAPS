@@ -1,13 +1,12 @@
 package APS.combat;
 
-import java.util.Scanner;
-
-import APS.ui.sistemaMenu;
 import APS.entities.personagens.Mobs;
 import APS.entities.personagens.Player;
 import APS.entities.personagens.enemyAI;
+import APS.ui.SistemaMenu;
+import java.util.Scanner;
 
-public class sistemaDeCombate {
+public class SistemaDeCombate {
 
     public static void iniciarCombate(Player player, Mobs enemy, Scanner sc) {
 
@@ -15,9 +14,9 @@ public class sistemaDeCombate {
 
         while (player.vivo() && enemy.vivo()) {
 
-            sistemaMenu.status(player, enemy);
+            SistemaMenu.status(player, enemy);
 
-            Action playerAction = sistemaMenu.turnoJogador(player, sc);
+            Action playerAction = SistemaMenu.turnoJogador(player, sc);
 
             // MAGIAS
             if (playerAction == Action.MAGIA) {
@@ -34,8 +33,8 @@ public class sistemaDeCombate {
                     if (skillEscolhida.equalsIgnoreCase("sair")) {
 
                         voltarMenu = true;
-                        sistemaMenu.status(player, enemy);
-                        playerAction = sistemaMenu.turnoJogador(player, sc);
+                        SistemaMenu.status(player, enemy);
+                        playerAction = SistemaMenu.turnoJogador(player, sc);
 
                         if (playerAction != Action.MAGIA) {
                             break;
@@ -68,8 +67,8 @@ public class sistemaDeCombate {
                     if (itemToUse.equalsIgnoreCase("sair")) {
 
                         voltarMenu = true;
-                        sistemaMenu.status(player, enemy);
-                        playerAction = sistemaMenu.turnoJogador(player, sc);
+                        SistemaMenu.status(player, enemy);
+                        playerAction = SistemaMenu.turnoJogador(player, sc);
 
                         if (playerAction != Action.INV) {
                             break;
@@ -116,7 +115,7 @@ public class sistemaDeCombate {
 
                 if (Math.random() < 0.4) {
                     System.out.println("O boss ataca duas vezes!");
-                    sistemaDeAcao.atacar(enemy, player);
+                    SistemaDeAcao.atacar(enemy, player);
                 }
             }
 
@@ -134,7 +133,7 @@ public class sistemaDeCombate {
                     player.atacarEspecial(enemy);
 
                 } else {
-                    sistemaDeAcao.atacar(player, enemy);
+                    SistemaDeAcao.atacar(player, enemy);
                 }
             }
 
@@ -159,7 +158,7 @@ public class sistemaDeCombate {
 
                     if (enemy.getTipo().equals("AGRESSIVO") && Math.random() < 0.3) {
                         System.out.println("O boss entrou em fúria!");
-                        sistemaDeAcao.atacar(enemy, player);
+                        SistemaDeAcao.atacar(enemy, player);
                     }
                     if (enemy.getTipo().equals("INTELIGENTE") && Math.random() < 0.2) {
                         System.out.println("O boss previu seu ataque!");
@@ -167,7 +166,7 @@ public class sistemaDeCombate {
                     }
                 }
 
-                sistemaDeAcao.atacar(enemy, player);
+                SistemaDeAcao.atacar(enemy, player);
             }
 
             // RESET TURNO
@@ -176,7 +175,7 @@ public class sistemaDeCombate {
         }
 
         // RESULTADO FINAL
-        sistemaMenu.status(player, enemy);
+        SistemaMenu.status(player, enemy);
         System.out.println("\n===== RESULTADO =====");
 
         if (player.vivo()) {

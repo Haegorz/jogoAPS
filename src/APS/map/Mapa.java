@@ -1,6 +1,6 @@
 package APS.map;
 
-import APS.combat.sistemaDeCombate;
+import APS.combat.SistemaDeCombate;
 import APS.entities.npcs.*;
 import APS.entities.personagens.*;
 import APS.events.*;
@@ -120,7 +120,7 @@ public class Mapa {
     public ResultadoEvento aoEntrar(Player player, Scanner sc) {
 
         if (npcAtual == null) {
-            TextControler.textInstant("\nVocê está em: " + nome);
+            TextControler.textInstant("\nVocê está em: " + nome + " ");
         }
 
         switch (tipo) {
@@ -155,7 +155,7 @@ public class Mapa {
                     boss.bossEscale(player.getLevel());
 
                     player.setKillCount(player.getKillCount() + 9);
-                    sistemaDeCombate.iniciarCombate(player, boss, sc);
+                    SistemaDeCombate.iniciarCombate(player, boss, sc);
 
                     if (!player.vivo()) {
                         return ResultadoEvento.MORREU;
@@ -176,7 +176,7 @@ public class Mapa {
                     boss1.setTipo("RAPIDO");
                     boss1.bossEscale(player.getLevel());
                     player.setKillCount(player.getKillCount() + 9);
-                    sistemaDeCombate.iniciarCombate(player, boss1, sc);
+                    SistemaDeCombate.iniciarCombate(player, boss1, sc);
 
                     if (!player.vivo()) {
                         return ResultadoEvento.MORREU;
@@ -193,20 +193,20 @@ public class Mapa {
 
             case BIBLIOTECA:
                 if (!boss2Derrotado) {
-                    TextControler.textInstant("Uma presença veloz te ataca!");
+                    TextControler.textInstant("Uma grande massa de ferro avança para você!");
 
                     Mobs boss2 = new Mobs("Paladino da Sucata", 330, 35, 40, 400, 1, 350);
                     boss2.setTipo("TANK");
                     boss2.bossEscale(player.getLevel());
 
                     player.setKillCount(player.getKillCount() + 9);
-                    sistemaDeCombate.iniciarCombate(player, boss2, sc);
+                    SistemaDeCombate.iniciarCombate(player, boss2, sc);
 
                     if (!player.vivo()) {
                         return ResultadoEvento.MORREU;
                     }
                     boss2Derrotado = true;
-                    TextControler.textDramatic("O paladino cai de joelhos...");
+                    TextControler.textDramatic("O paladino cai de joelhos...\n");
                     TextControler.textDramatic("Heroi... Hoje eu cairei, mas meu rei viverá para sempre!\n");
                     return ResultadoEvento.SAIR_MAPA;
                 } else {
@@ -241,7 +241,7 @@ public class Mapa {
                 boss11.bossEscale(player.getLevel());
                 player.setKillCount(player.getKillCount() + 9);
 
-                sistemaDeCombate.iniciarCombate(player, boss11, sc);
+                SistemaDeCombate.iniciarCombate(player, boss11, sc);
 
                 if (!player.vivo())
                     return ResultadoEvento.MORREU;
@@ -264,7 +264,7 @@ public class Mapa {
                         Mobs bossFinal = new Mobs("Rei do Lixão Supremo", 400, 85, 70, 0, 1, 0);
                         bossFinal.setTipo("AGRESSIVO");
                         bossFinal.bossEscale(player.getLevel());
-                        sistemaDeCombate.iniciarCombate(player, bossFinal, sc);
+                        SistemaDeCombate.iniciarCombate(player, bossFinal, sc);
 
                         if (!player.vivo()) {
                             Ending.finalRuim();

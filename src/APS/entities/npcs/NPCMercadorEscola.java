@@ -22,8 +22,8 @@ public class NPCMercadorEscola extends NPC {
 
         System.out.println("1 - Poção HP (+20 HP) ........ 20 moedas");
         System.out.println("2 - Poção MP (+20 MP) ........ 15 moedas");
-        System.out.println("3 - Espada de Ferro (+10 ATK) . 130 moedas");
-        System.out.println("4 - Armadura de Couro (+10 DEF) 120 moedas");
+        System.out.println("3 - Espada de Ferro Encantada (+10 ATK) . 130 moedas");
+        System.out.println("4 - Armadura de Couro Encantada (+10 DEF) 120 moedas");
         System.out.println("5 - Sair");
 
         int op;
@@ -81,7 +81,7 @@ public class NPCMercadorEscola extends NPC {
                 }
 
                 player.ganharMoedas(-130);
-                player.adicionarItem("espada de ferro",new EquipItem("Espada de Ferro Encantado",TipoItem.ATK,10),1);
+                player.adicionarItem("espada de ferro encantada",new EquipItem("Espada de Ferro Encantada",TipoItem.ATK,10),1);
                 System.out.println("Você comprou uma Espada de Ferro Encantada!");
                 return ResultadoEvento.CONTINUAR;
 
@@ -94,7 +94,7 @@ public class NPCMercadorEscola extends NPC {
                 }
 
                 player.ganharMoedas(-120);
-                player.adicionarItem("armadura de couro",new EquipItem("Armadura de Couro Encantada",TipoItem.DEF,10),1);
+                player.adicionarItem("armadura de couro encantada",new EquipItem("Armadura de Couro Encantada",TipoItem.DEF,10),1);
                 System.out.println("Você comprou uma Armadura de Couro Encantada!");
                 return ResultadoEvento.CONTINUAR;
 

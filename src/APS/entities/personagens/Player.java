@@ -1,16 +1,15 @@
 package APS.entities.personagens;
 
+import APS.combat.SistemaDeAcao;
+import APS.combat.Skill;
+import APS.items.BattleItem;
+import APS.items.EquipItem;
+import APS.items.Item;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
-import APS.combat.Skill;
-import APS.combat.sistemaDeAcao;
-import APS.items.BattleItem;
-import APS.items.EquipItem;
-import APS.items.Item;
 
 public class Player extends Personagens {
 
@@ -198,7 +197,7 @@ public class Player extends Personagens {
 				break;
 
 			default:
-				sistemaDeAcao.atacar(this, inimigo);
+				SistemaDeAcao.atacar(this, inimigo);
 		}
 
 		if (Math.random() < 0.05) {

@@ -1,6 +1,6 @@
 package APS.entities.npcs;
 
-import APS.combat.sistemaDeCombate;
+import APS.combat.SistemaDeCombate;
 import APS.entities.personagens.Mobs;
 import APS.entities.personagens.Player;
 import APS.events.Ending;
@@ -38,7 +38,7 @@ public class NPCHotel extends NPC {
                     Mobs secretboss = new Mobs("Gi...", 1, 1, 1, 1, 1, 0);
                     secretboss.setTipo("INTELIGENTE");
                     player.setKillCount(player.getKillCount() - 10);
-                    sistemaDeCombate.iniciarCombate(player, secretboss, sc);
+                    SistemaDeCombate.iniciarCombate(player, secretboss, sc);
 
                     if (!player.vivo()) {
                         Ending.finalRuimlixo();

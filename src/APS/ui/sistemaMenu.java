@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-public class sistemaMenu {
+public class SistemaMenu {
 
     public static void status(Personagens p, Personagens e) {
 

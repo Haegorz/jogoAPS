@@ -8,7 +8,7 @@ public class Ending {
         System.out.println("\n==================================");
         System.out.print("           ");
         TextControler.textDramatic("FINAL BOM");
-        System.out.print("             ");
+        System.out.print("             \n");
         System.out.println("==================================\n");
 
         TextControler.textFast("O Rei dos Lixões foi derrotado.\n");
@@ -25,7 +25,7 @@ public class Ending {
         System.out.println("\n==================================");
         System.out.print("           ");
         TextControler.textDramatic("FINAL RUIM");
-        System.out.print("             ");
+        System.out.print("             \n");
         System.out.println("==================================\n");
 
         TextControler.textFast("Você confiou no rei...\n");
@@ -41,7 +41,7 @@ public class Ending {
         System.out.println("\n==================================");
         System.out.print("           ");
         TextControler.textDramatic("FINAL SECRETO");
-        System.out.print("             ");
+        System.out.print("             \n");
         System.out.println("==================================\n");
 
         TextControler.textFast("Mesmo traído, você venceu.\n");
@@ -56,7 +56,7 @@ public class Ending {
         System.out.println("\n==================================");
         System.out.print("           ");
         TextControler.textDramatic("FINAL SECRETO??? (Não seja ganancioso!)");
-        System.out.print("             ");
+        System.out.print("             \n");
         System.out.println("==================================\n");
 
         TextControler.textFast("Você perdeu a aposta...\n");
@@ -70,7 +70,7 @@ public class Ending {
         System.out.println("\n==================================");
         System.out.print("           ");
         TextControler.textDramatic("FINAL RUIM ???(Seja educado!)            \n");
-        System.out.print("             ");
+        System.out.print("             \n");
         System.out.println("==================================\n");
 
         TextControler.textFast("Você não deveria ficar xingando as pessoas...\n");
@@ -83,7 +83,7 @@ public class Ending {
         System.out.println("\n==================================");
         System.out.print("           ");
         TextControler.textDramatic("FINAL SECRETO??? (Mas a que custo?)");
-        System.out.print("             ");
+        System.out.print("             \n");
         System.out.println("==================================\n");
 
         TextControler.textFast("Você derrubou o rei...\n");
@@ -98,7 +98,7 @@ public class Ending {
         System.out.println("\n==================================");
         System.out.print("           ");
         TextControler.textDramatic("FINAL RUIM??? (O mal triunfa?)            \n");
-        System.out.print("             ");
+        System.out.print("             \n");
         System.out.println("==================================\n");
 
         TextControler.textFast("Você se uniu ao mal...\n");

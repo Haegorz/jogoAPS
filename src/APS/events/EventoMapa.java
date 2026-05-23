@@ -1,6 +1,6 @@
 package APS.events;
 
-import APS.combat.sistemaDeCombate;
+import APS.combat.SistemaDeCombate;
 import APS.entities.personagens.Mobs;
 import APS.entities.personagens.Player;
 import APS.ui.TextControler;
@@ -230,7 +230,7 @@ public class EventoMapa {
             enemy.setTipo("RAPIDO");
             enemy.bossEscale(player.getLevel());
         }
-        sistemaDeCombate.iniciarCombate(player,enemy,sc);
+        SistemaDeCombate.iniciarCombate(player,enemy,sc);
     }
 
     
@@ -247,7 +247,7 @@ public class EventoMapa {
             enemy.setTipo("TANK");
             enemy.bossEscale(player.getLevel());
         }
-        sistemaDeCombate.iniciarCombate(player,enemy,sc);
+        SistemaDeCombate.iniciarCombate(player,enemy,sc);
     }
 
  
@@ -265,6 +265,6 @@ public class EventoMapa {
             enemy.bossEscale(player.getLevel());
         }
 
-        sistemaDeCombate.iniciarCombate(player,enemy,sc);
+        SistemaDeCombate.iniciarCombate(player,enemy,sc);
     }
 }
